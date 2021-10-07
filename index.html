@@ -1,8 +1,85 @@
 ---
 layout: default
-food: Pizza
 ---
 
-<h1>{{ page.food }}</h1>
-<h2>{{ page.food }}</h2>
-<h3>{{ page.food }}</h3>
+</head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">CS4641-project</h1>
+      <h2 class="project-tagline"></h2>
+      
+        <a href="https://github.com/baoalvin1/CS4641-project" class="btn">View on GitHub</a>
+      
+      
+    </section>
+
+    <section class="main-content">
+      <h1 id="cs4641-project">CS4641-project</h1>
+<h2 id="introductionbackground">Introduction/Background</h2>
+<p>Film is a very popular form of media across all parts of the world. Though seeing a movie used to require making a trip to the local theatre, we are in an age where people are able to watch movies whenever and wherever they want. With streaming services replacing physical media, the cost of seeing a new movie is less than ever, and a small subscription fee gives users of these streaming platforms access to an unbelievable number of movies ranging many genres and countries.</p>
+<h2 id="problem-definition">Problem Definition</h2>
+<p>With such a wide variety of movies being so readily available, many people have started to develop a hobby of watching new movies that they may have otherwise never seen if they had to pay theater or DVD prices and expand their palate in regards to film. However, for every diamond in the rough that one can find on these services, there are about a couple hundred other movies on the site that will do little to interest this viewer, so we beg the question: how do we make it so that film enthusiasts can find their future favorite movies without having to sit through hours of films that they won’t end up caring for? For our machine learning project, we want to create a model that can predict the genre of a movie based on its summary and metadata with moderate accuracy. This will allow users to group together movies of similar themes in order to explore a broader collection of movies that prove very similar to some of their favorites.</p>
+<h2 id="methodology">Methodology</h2>
+<p>The classification process was decomposed into a few major sequential components including the data processing (cleaning), model training, and prediction evaluation stages.</p>
+<h3 id="dataset-preprocessing">Dataset Preprocessing</h3>
+<p>Two datasets, the movie metadata and plot summaries datasets, were derived from the ‘CMU Movie Summary Corpus’ dataset collected by David Bamman, et al at Carnegie Mellon University which included movie box office revenue, genre, release date, runtime, language, and plot summaries. This collection of datasets was chosen due to its credible, structruted, and reliable nature with regards to the compiled information and relatibility to our project’s objectives. During the data preprocessing component the movie dataset containing over 40,000 movie titles, their IDs, and additional metadata (language, duration, etc.) was merged with the movie plot data set along their respective movie ID tags, essentially adding an extra column containing respective movie plots to the movie dataset. This complete dataset was then cleaned by dropping irrelevant features that we deemed ineffective towards building the main classification model such as the language, country, duration, release date, and since their inclusion could have caused massive overfitting on those insignificant features; this resulted in the movie dataset retaining only the movie title, ID, plot, and genres. The movie plots provided in the dataset were then stripped of any punctuation, capitalization (using Regex library), and stop words (using NLTK) to isolate only the meaningful text for the purposes of the natural language processing conducted later on. Since the genres provided in the dataset were multilabel while the current objective of our model was to predict singular label classifications, only the first genre was chosen from each list of genres linked to each movie and only the top five most frequent genres were kept for simplicity/generality; note that this may be a temporary choice and the model may be transitioned to be come a multilabel classifier depending on evaluation metrics. Now with a dataset of cleaned entities, the ‘X’ and ‘y’ arrays of input features and output label predictions (genres) could be extracted and finalized for proper training and testing set parsing prior to being fed into the model. The ‘X’ input was simply the collection of cleaned plots correpsponding to each movie; The ‘y’ output was structured using a label binarizer which produced a one hot encoding of all the unique genres in the data set (converted each genre into a column with a 1/0 indicating its presence).</p>
+
+<p>Note: The following images of the tables only output the head of each table, the actual data is much larger</p>
+<h4 id="table-1-raw-movie-dataset">Table 1: Raw Movie Dataset</h4>
+<p><img src="https://user-images.githubusercontent.com/31360127/113789931-29b50e80-970e-11eb-8feb-0ecbb705db23.png" alt="image" /></p>
+<h4 id="table-2-raw-plot-dataset">Table 2: Raw Plot Dataset</h4>
+<p><img src="https://user-images.githubusercontent.com/31360127/113789954-3a658480-970e-11eb-868c-e000181796a6.png" alt="image" /></p>
+<h4 id="table-3-clean-merged-dataset">Table 3: Clean Merged Dataset</h4>
+<p><img src="https://user-images.githubusercontent.com/31360127/113789655-882dbd00-970d-11eb-89f1-c9a851a6f7c4.png" alt="image" /></p>
+
+<h3 id="model-architecture-training-and-evaluation-metrics">Model Architecture, Training, and Evaluation Metrics</h3>
+<p>The processed data was split into training and testing tests with a ratio of 80% to 20%, respectively. The input plot features in text-form were converted to numerical values through a Tfidf Vectorizer by fitting and transforming the text; Tfidf was chosen as the medium for conversion due to its effective text characterization using word frequency across all the ‘documents.’ Currently, the main model architecture is based on a Gaussian Naive Bayes model with a one versus rest classifier as implemented in the scikit-learn library. As we all know, Naive Bayes makes the drastic assumption that features are independent of one another and is subject to change depending on continued testing and accuracy. The main metrics for model evaluation were general accuracy and the F-score (precision/recall) between the actual and predicted genre labels. These provide an indication of the efficiacy of the machine learning model and need for further modifications and optimizations.</p>
+
+<h2 id="results">Results</h2>
+<p>We trained multiple classifiers using Gaussian Naive Bayes, Logistic Regression, and a Decision Tree Classifier. From our accuracy score and our F-score we obtained the following results (Note: The closer the F-score and Accuracy is to 1, the more optimal the predictions):</p>
+<h4 id="table-4-gaussian-naive-bayes-metrics">Table 4: Gaussian Naive Bayes Metrics</h4>
+<p><img src="https://user-images.githubusercontent.com/55769184/116170430-d7e02280-a6d4-11eb-9425-a1038f616bc0.png" alt="image" /></p>
+<h4 id="table-5-logistic-regression-metrics">Table 5: Logistic Regression Metrics</h4>
+<p><img src="https://user-images.githubusercontent.com/55769184/116170437-dadb1300-a6d4-11eb-8569-cca95c9b8a75.png" alt="image" /></p>
+<h4 id="table-6-decision-tree-metrics">Table 6: Decision Tree Metrics</h4>
+<p><img src="https://user-images.githubusercontent.com/55769184/116170420-d31b6e80-a6d4-11eb-9002-981dfc10b799.png" alt="image" /></p>
+<h4 id="table-7-example-movie-genre-prediction">Table 7: Example Movie Genre Prediction</h4>
+<p><img src="https://user-images.githubusercontent.com/31360127/116178459-9b67f300-a6e3-11eb-8bab-b5624f66d3c0.png" alt="image" /></p>
+
+<h2 id="discussion">Discussion</h2>
+<p>From our results it seems that our approach in further cleaning the data and limiting genre selection to independent genres was a great way of fine tuning the model.</p>
+
+<p>During this iteration, we added a new Decision Tree model which produced genre predictions resulting in a greater accuracy of 44 percent. Our previous approaches also increased greatly with a 53 percent accuracy for Gaussian Naive Bayes and a 62 percent accuracy with Logistic Regression. These percentage values are significant improvements from last time, with previous percentages of 25 and 30 for Gaussian Naive Bayes and Logistic Regression respectively.</p>
+
+<p>We found out that the reason why the percentages were so low the first time is because low accuracy was likely to result from the singular genre extraction technique implemented which assigns only a single genre to each movie in the dataset out of its multilabel set, as the model may have clashing predictions which may be accurate when considering all the genres that characterize the movie. For example, if we take a movie like Star Wars, this movie could be considered a sci-fi movie, but it could also be considered an adventure movie, and one label is not objectively more accurate to use than the other. Because of this, if we tested our model for Star Wars and used adventure as our single genre to classify it under, our model could predict that it is a sci-fi movie, and even though this is also true, it would be seen as a failure by the model, resulting in a false negative.</p>
+
+<p>In our initial attempts, there was inherent overfitting due to certain genres fitting a higher number of movies than other genres that we used, as could be very clearly seen by the fact that we had almost triple the number of Thrillers as we did Romantic Comedies. Because of this discrepancy in size, our model became overtrained for identifying some genres and undertrained for identifying others. However, this time, we limited genre selection to an array of independent (commonly mutually exclusive) genres, which increased accuracy tremendously. For example, having both Action and Crime Fiction genres as potential genres increased ambiguity for the univariate predictions due to there being overlap between these two genres in many movies, whereas Sci-fi and Romance had much higher accuracy due to Sci-Fi Romance movies being much more uncommon than Action Crime Fiction movies. Therefore, we produced more accurate results in the final stages through additional testing and experimentation.</p>
+
+<h2 id="conclusions">Conclusions</h2>
+<p>The final results of our movie genre prediction classification model were initially very unexpected as we believed that due to the massive size of the dataset and single label predictions, there would be an extremely high accuracy. As we continued on and further investigated the shape and dependencies within the dataset and mechanics of the model, we understood why we should have expected lower accuracies as a result of the non-mutually exclusive nature of movie genres as discussed previously in the report. While the accuracy is not optimal, it was increased substantially over the course of our experimentation and reached a level sufficient for semi-accurate genre tagging with the dataset manipulation. In future iterations, potentially choosing a dataset with an additional number of features including movie reviews could potentially increase the performance of our model by providing an extra facet to train on. Moreover, a substantial improvement in the model architecture could be to implement a multilabel classifier which is able to input and output an array of several genres per movie which could completely circumvent the posed issues. All in all, however, the results of this project have been extremely promising and have provided a foundational understanding for future research and development in the field of genre tagging.</p>
+
+<h2 id="group-member-contributions">Group Member Contributions</h2>
+<p>Alvin Bao - Worked on training the 3 models, wrote the results, and tuned the models for better accuracy.<br />
+Feras Alsaiari - Worked on training the 3 models, wrote the conclusion, and helped come up with the model architectures.<br />
+Jacob Smith - Researched our topic and found CMU dataset, wrote the discussion section, and wrote the introduction &amp; problem definition.<br />
+Mohammad Aqdas Imran - Cleaned the data, wrote the discussion section, and wrote the data cleaning section.<br />
+Parth Desai - Cleaned the data, wrote the discussion section, and made the video for our report.</p>
+
+<h2 id="references">References</h2>
+<p>[1] Learning Latent Personas of Film Characters David Bamman, Brendan O’Connor, and Noah A. Smith ACL 2013, Sofia, Bulgaria, August 2013 http://www.cs.cmu.edu/~ark/personas/</p>
+
+<p>[2] Bird, Steven, Edward Loper and Ewan Klein (2009), Natural Language Processing with Python. O’Reilly Media Inc https://www.nltk.org/</p>
+
+<p>[3] A. Rahman and M. S. Hossen, “Sentiment Analysis on Movie Review Data Using Machine Learning Approach,” 2019 International Conference on Bangla Speech and Language Processing (ICBSLP), Sylhet, Bangladesh, 2019, pp. 1-4, doi: 10.1109/ICBSLP47725.2019.201470.</p>
+
+
+      <footer class="site-footer">
+        
+          <span class="site-footer-owner"><a href="https://github.com/baoalvin1/CS4641-project">CS4641-project</a> is maintained by <a href="https://github.com/baoalvin1">baoalvin1</a>.</span>
+        
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a>.</span>
+      </footer>
+    </section>
+
+  </body>
+    
