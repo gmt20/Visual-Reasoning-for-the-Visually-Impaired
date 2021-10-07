@@ -15,10 +15,13 @@ layout: default
 </p>
         
 <h2 id="methodology">Methodology</h2>
-<p>The classification process was decomposed into a few major sequential components including the data processing (cleaning), model training, and prediction evaluation stages.</p>
-<h3 id="dataset-preprocessing">Dataset Preprocessing</h3>
-<p>Two datasets, the movie metadata and plot summaries datasets, were derived from the ‘CMU Movie Summary Corpus’ dataset collected by David Bamman, et al at Carnegie Mellon University which included movie box office revenue, genre, release date, runtime, language, and plot summaries. This collection of datasets was chosen due to its credible, structruted, and reliable nature with regards to the compiled information and relatibility to our project’s objectives. During the data preprocessing component the movie dataset containing over 40,000 movie titles, their IDs, and additional metadata (language, duration, etc.) was merged with the movie plot data set along their respective movie ID tags, essentially adding an extra column containing respective movie plots to the movie dataset. This complete dataset was then cleaned by dropping irrelevant features that we deemed ineffective towards building the main classification model such as the language, country, duration, release date, and since their inclusion could have caused massive overfitting on those insignificant features; this resulted in the movie dataset retaining only the movie title, ID, plot, and genres. The movie plots provided in the dataset were then stripped of any punctuation, capitalization (using Regex library), and stop words (using NLTK) to isolate only the meaningful text for the purposes of the natural language processing conducted later on. Since the genres provided in the dataset were multilabel while the current objective of our model was to predict singular label classifications, only the first genre was chosen from each list of genres linked to each movie and only the top five most frequent genres were kept for simplicity/generality; note that this may be a temporary choice and the model may be transitioned to be come a multilabel classifier depending on evaluation metrics. Now with a dataset of cleaned entities, the ‘X’ and ‘y’ arrays of input features and output label predictions (genres) could be extracted and finalized for proper training and testing set parsing prior to being fed into the model. The ‘X’ input was simply the collection of cleaned plots correpsponding to each movie; The ‘y’ output was structured using a label binarizer which produced a one hot encoding of all the unique genres in the data set (converted each genre into a column with a 1/0 indicating its presence).</p>
-
+<h3 id="datasets">Datasets</h3>
+<ul>
+<li>Object Detection dataset - this dataset consists of images and object categories that the images encompass. 
+</li>
+<li>Questions and Answers dataset - this dataset consists of text based questions. A query will be a question that the visually impaired person will ask to the system, and an answer would be the model provided output. </li>
+</ul>
+        
 <p>Note: The following images of the tables only output the head of each table, the actual data is much larger</p>
 <h4 id="table-1-raw-movie-dataset">Table 1: Raw Movie Dataset</h4>
 <p><img src="https://user-images.githubusercontent.com/31360127/113789931-29b50e80-970e-11eb-8feb-0ecbb705db23.png" alt="image" /></p>
