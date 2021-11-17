@@ -77,9 +77,9 @@ layout: default
         <p>The first challenge that we faced is how to identify the images to be discarded.</p>
         
 <h4>Solution:</h4>
-<li>To identify such groups of images, we decided to perform K-means clustering on the original image dataset to generate similar clusters.</li>
-<li>After generating clusters of similar images, we manually went through each of the clusters, and discarded the clusters that seemed useless for our use case.</li>
-<li>The discarded clusters include clusters having blurred/ unclear images.</li>
+<li align="justify">To identify such groups of images, we decided to perform K-means clustering on the original image dataset to generate similar clusters.</li>
+<li align="justify">After generating clusters of similar images, we manually went through each of the clusters, and discarded the clusters that seemed useless for our use case.</li>
+<li align="justify">The discarded clusters include clusters having blurred/ unclear images.</li>
 
 <h4>Challenge 2: </h4>    
 <p align="justify">K-means clustering uses Euclidean distance as the metric to determine the similarity between different images. But some images might contain similar objects but they might be present in different orientations/positions/color contrasts, etc. Hence considering just the euclidean distance between the pixel values is not a good metric. 
