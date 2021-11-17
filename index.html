@@ -534,7 +534,7 @@ To model question text, we will be using the bag-of-words (BOW) technique. The B
 
 <h3>Architecture</h3>
 <p align="justify">As discussed in the training pipeline, we have the image + question embedding for each of the (image, question) pairs. For image embeddings, we use the frozen parameters from the Inceptionv3 model learned on ImageNet classification, and no fine-tuning was performed. 
-We concatenate the BOW questions and images (2048 + 3042), to get a resultant vector of dimension 5090. We use this combined input for the Multi-Layer Perceptron (MLP). MLP is a fully connected neural network classifier consisting of 3 hidden layers with 5090 hidden units. We use ReLU for activation, which is finally followed by a  log softmax layer to obtain a probability distribution over the top K answers. Cross-entropy loss is used to compute loss for our model.
+We concatenate the BOW questions and images (2048 + 3042), to get a resultant vector of dimension 5090. We use this combined input for the Multi-Layer Perceptron (MLP). MLP is a fully connected neural network classifier consisting of 3 hidden layers with 5090 hidden units. We use ReLU for activation, which is finally followed by a  log softmax layer to obtain a probability distribution over the top K answers. Since the VizWiz dataset has 10 ground-truth answers for each training instance, we use a "soft" cross-entropy loss so that the model optimises the weights by considering each ground-truth answer. The team is currently working on the outlined MLP pipeline which we plan to use as a baseline for future extensions. 
 </p>
 <figure>
   <img src="Picture11.png" alt="Training Pipeline Architecture" style="width:100%">
