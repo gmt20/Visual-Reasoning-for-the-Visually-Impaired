@@ -5,7 +5,7 @@ layout: default
     <section class="main-content">
       <h1 id="cs7641-project" align="center">CS7641 - Project Team 17</h1>
 
-<h2 id="introductionbackground">Introduction/Background</h2>
+<h2 id="introductionbackground">Introduction</h2>
 <h3 id="VQA">Visual Question Answering for Visually Impaired
 </h3>  
         
@@ -29,72 +29,86 @@ layout: default
     
 </table>
 
-<h3 id="datasets">Datasets</h3>
-<ul>
-<li>Object Detection dataset - Consists of images and object categories that the images encompass.
-</li>
-<li>Questions and Answers dataset - Consists of text based questions. A query will be a question that the visually impaired person will ask to the system, and an answer would be the output of the model. </li>
-</li>
-<li>RefCOCO, Flickr30k, CLEVR
-</li>
-</ul>
-        
-<h3 id="machine_learning_checkpoints">Machine Learning Checkpoints</h3>
-<ul>
-<li>Using supervised algorithms such as CNN, we will build the object detection model to detect objects in the surroundings 
-</li>
-<li>Using unsupervised and semi-supervised algorithms such as vanilla-RNN, LSTM, GRU, we will develop a text detection system to understand the query input. 
-</li>
-<li>We will later build a multi-modal model combining the above models to achieve our goal. We will then perform a comparison of the results of our model with existing state-of-the-art (SOTA) models. 
-</li>
-</ul>
+<h2 id="Clustering">Unsupervised Algorithm:  Clustering </h2>
     
-<p>So when integrated into an e-stick, the visually impaired will be providing a speech input to the system, which will be converted into text. Our model will use this text as an input and provide an answer to the query in text, which can then again be converted into a voice-controlled output for the visually impaired to understand.
+<p>On closely examining the dataset, we observed that few images are totally blurred, few are black/white and few others just have too much flash. Hence we realised the need to clean the dataset before feeding it to our training pipeline. 
+</p>
+
+<h4>Challenge 1: </h4>
+        <p>The first challenge that we faced is how to identify the images to be discarded.</p>
+        
+<h4>Solution:</h4>
+<li>To identify such groups of images, we decided to perform K-means clustering on the original image dataset to generate similar clusters.</li>
+</li>After generating clusters of similar images, we manually went through each of the clusters, and discarded the clusters that seemed useless for our use case.</li>
+<li>The discarded clusters include clusters having blurred/ unclear images.</li>
+
+<h4>Challenge 2: </h4>    
+        <p>K-means clustering uses Euclidean distance as the metric to determine the similarity between different images. But some images might contain similar objects but they might be present in different orientations/positions/color contrasts, etc. Hence considering just the euclidean distance between the pixel values is not a good metric. 
+        </p>
+
+<h4>Solution:</h4>
+
+<p>We used CNN to detect and classify the objects and accordingly performed the clustering on these CNN generated feature vectors.
+Each CNN layer performs optimized operations like centering the objects, gray-scale conversion(normalization), detecting the objects, and accordingly classifying and clustering the images.
 </p>
     
-<h2 id="scope">Project Scope</h2>
-<u1>
-<li>Speech-to-text or text-to-speech conversions modules will not be included in the project.
-</li>
-<li>Nature of user input queries will be limited to the predefined dataset.
-</li>
-</ul>
+<h4>Challenge 3: </h4>   
+<p>The next challenge that we faced was to identify the correct value of K(number of clusters) to be generated.</p>
+
+<h4>Solution:</h4>
+
+<p>To identify the accurate number of clusters to be considered, we calculated the loss values for a variety of distinct K values.
+We then plotted each of these values and used the Elbow method to determine the best value of K to be considered for our use case.</p>
+
+<p>The following table depicts the loss values obtained for each value of k:</p>
+
+<table>
     
-<h2 id="potential_results">Project Results</h2>
-<u1>
-<li>We aim to develop a system that can potentially make the navigation for a section of population a little better. 
-</li>
-<li>We aim to build our model by comparing the results of the State of the Art models available today as a benchmark. 
-</li>
-<li>We foresee the potential of further use of this model for various other navigation applications such as using the developed framework for visual-language navigation for mobile robots.</p>
-</li>
-</u1>
+</table>
 
-<h2 id="timeline">Proposed Timeline</h2>
-<p><img src="Planning.png" alt="image" style=”display:block;”></p>
+<p>The following is the elbow curve we generated based on the above values:</p>
 
-<h2 id="responsibilities">Responsibilities</h2>
-<p><img src="Roles slide.png" alt="image" style=”display:block;” align="cnetre"></p>
+<img></img>
 
-<h2 id="references">References</h2>
-<ul>
-<li>Kunja Bihari Swain et. al. Arduino based automated stick guide for a visually impaired person, S.A. Engineering College, Chennai, Tamil Nadu, India, 2014.
-</li>
-<li>Ashwini B Yadav, et. al., Design and Development of Smart Assistive Device for Visually Impaired People, IEEE International Conference On Recent Trends In Electronics Information Communication Technology, India, May 2016. 
-</li>
-<li>Zeeshan Saquib, et. al.BlinDar: An Invisible Eye for the Blind People, IEEE International Conference On Recent Trends In Electronics Information Communication Technology, India, May 2017. 
-</li>
-<li>Ayat A. Nada et. al.Assistive Infrared Sensor Based Smart Stick for Blind People, Science and Information Conference, London, UK, 2015. 
-</li>
-<li>Nishant Banat James, Ashish Harsola. Navigation aiding stick for visually impaired, International Conference on Green Computing and Internet of Things, May 2015. 
-</li>
-<li>Sunil Kanzariya, Prof. Vishal Vora, “Real Time Video Monitoring System Using Raspberry Pi”, National Conference on Emerging Trends in Computer, Electrical Electronics, 2015. 
-</li>
-<li>Lun Zhang, Stan Z. Li, Xiaotong Yuan and Shiming Xiang, “Real-time Object Classification in Video Surveillance Based on Appearance Learning”, IEEE Conference on Computer Vision and Pattern Recognition,2007. 
-</li>
-</ul>
-    
-       
-</section>
+<p>Hence, based on the elbow method, we obtained the accurate value of K as 60. Therefore, we generated 60 clusters. We then manually visited each of the clusters(i.e. each of the 60 folders of images), and discarded a few clusters to create a clean image dataset.
+
+In this way, the dataset was reduced from 20,523 image/question pairs to 13000 image/question pairs.
+</p>
+
+<p>The following images show samples that were discarded:</p>
+<img></img>
+
+<p>The following images show samples that were included:</p>
+<img></img>
+
+
+<h4>Results of Data preprocessing</h4>
+<p>To overcome challenges 1,2 and 3 we ran K-means on feature vectors generated by a forward pass of a Convolutional Neural Network to generate 60 clusters, and out of those 60 clusters, we kept 29 clusters and discarded the rest based on the reasoning provided before, thus generating a dataset consisting of 13000 image/question pairs. 
+</p>
+
+<h4>Annotation Script</h4>
+
+<p>After generating 29 folders(clusters), we had to use only the images from these folders. To uniquely read images from 29 out of 60 folders, we wrote an annotation script.
+</p>
+<p>The script reads the annotation json file, which consists of the following structure:</p>
+
+<pre class="line-numbers">
+   <code class="language-css">
+{
+Image_name : “ “, // Image name
+“Question: “ “, // The question associated with each image
+“Answers” : {
+		// List of answers from 10 people
+	      }
+“Answer_type”:[ yes/no], [other], [unanswerable],
+“Answerable” : 0/1
+}
+  </code>
+</pre>
+
+<p>From this file, only those images will be considered that are present in the 29 clusters, and for those image names, we read questions and answers associated with them. All this data is then loaded into a new json file.
+</p>
+<p>This new json file is then used for further processing.</p>
+</p>
 </body>
     
