@@ -9,7 +9,7 @@ layout: default
 <h3 id="VQA">Visual Question Answering for Visually Impaired
 </h3>  
         
-<p>To resolve the visual challenges faced by the visually impaired people in their day-to-day lives, we present a Machine Learning model based on the Vizwiz dataset. The training dataset consists of photos taken by the blind people annotated with the question asked relevant to that image. Each annotation question  also consists of answers and answer types specified by 10 people for each sample. This provides an opportunity as well a challenge to assist the visually impaired to help them in navigation, assisting their daily life tasks and answering their visual questions etc. The original Vizwiz dataset consisted of :
+<p align="justify">To resolve the visual challenges faced by the visually impaired people in their day-to-day lives, we present a Machine Learning model based on the Vizwiz dataset. The training dataset consists of photos taken by the blind people annotated with the question asked relevant to that image. Each annotation question  also consists of answers and answer types specified by 10 people for each sample. This provides an opportunity as well a challenge to assist the visually impaired to help them in navigation, assisting their daily life tasks and answering their visual questions etc. The original Vizwiz dataset consisted of :
 </p>
 <li>20,523 training image/question pairs</li>
 <li>4,319 validation image/question pairs</li>
@@ -19,10 +19,10 @@ layout: default
         
 <h3> Feature Extraction using Convolutional Neural Networks </h3>       
         
-<p>We use transfer learning to create feature vectors for the images present in the dataset. The activations from the last layer of different 3 pre-trained models like Inceptionv3, ResNet (Residual Network) and VGG16 (Very Deep Convolutional Networks for Large-Scale Image Recognition), which are state-of-the-art and are widely used. These models are pre-trained on ImageNet, which is a huge image dataset containing more than 14 million images. Hence, they can be used for our task to create feature vectors of the images considered for our task from the Vizwiz dataset.
+<p align="justify">We use transfer learning to create feature vectors for the images present in the dataset. The activations from the last layer of different 3 pre-trained models like Inceptionv3, ResNet (Residual Network) and VGG16 (Very Deep Convolutional Networks for Large-Scale Image Recognition), which are state-of-the-art and are widely used. These models are pre-trained on ImageNet, which is a huge image dataset containing more than 14 million images. Hence, they can be used for our task to create feature vectors of the images considered for our task from the Vizwiz dataset.
 </p>       
         
-<p> We first ran the Inceptionv3 using CPU and GPU, with and without batching. The time taken for each of these operations are displayed in Table . 
+<p align="justify"> We first ran the Inceptionv3 using CPU and GPU, with and without batching. The time taken for each of these operations are displayed in Table . 
 </p>
 <br/>
 <table>
@@ -70,7 +70,7 @@ layout: default
 <br/>
 <h2 id="Clustering">Unsupervised Algorithm:  Clustering </h2>
     
-<p>On closely examining the dataset, we observed that few images are totally blurred, few are black/white and few others just have too much flash. Hence we realised the need to clean the dataset before feeding it to our training pipeline. 
+<p align="justify">On closely examining the dataset, we observed that few images are totally blurred, few are black/white and few others just have too much flash. Hence we realised the need to clean the dataset before feeding it to our training pipeline. 
 </p>
 
 <h4>Challenge 1: </h4>
@@ -87,7 +87,7 @@ layout: default
 
 <h4>Solution:</h4>
 
-<p>We used CNN to detect and classify the objects and accordingly performed the clustering on these CNN generated feature vectors.
+<p align="justify">We used CNN to detect and classify the objects and accordingly performed the clustering on these CNN generated feature vectors.
 Each CNN layer performs optimized operations like centering the objects, gray-scale conversion(normalization), detecting the objects, and accordingly classifying and clustering the images.
 </p>
     
@@ -96,10 +96,10 @@ Each CNN layer performs optimized operations like centering the objects, gray-sc
 
 <h4>Solution:</h4>
 
-<p>To identify the accurate number of clusters to be considered, we calculated the loss values for a variety of distinct K values.
+<p align="justify">To identify the accurate number of clusters to be considered, we calculated the loss values for a variety of distinct K values.
 We then plotted each of these values and used the Elbow method to determine the best value of K to be considered for our use case.</p>
 
-<p>The following table depicts the loss values obtained for each value of k:</p>
+<p align="justify">The following table depicts the loss values obtained for each value of k:</p>
 
 <table>
     
@@ -159,9 +159,6 @@ Image_name : “ “, // Image name
 
 <h3>Resnet V/s Inception V/s VGG16</h3>
 <h4>InceptionV3_Max_Normalized</h4>
-
-<p>Loss Values:  [7691.446390113959, 7507.774507255225, 7391.517725536679, 7226.133910619914, 6991.397552682225, 6746.565646699269, 6499.366045281326, 6356.497762813506, 5795.658596714202, 5321.662363185365]
-</p>
 
 <table>
 </table>
