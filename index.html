@@ -460,21 +460,21 @@ Image_name : “ “, // Image name
 </p>
 
 <h3>2. Training Pipeline:</h3>
-<p align="justify">After choosing the relevant clusters, the next task is to represent the training data to be fed into the neural network. </p>
+<p align="justify">After choosing the relevant clusters, the next task is to represent the training data to be fed into the neural network. We will be using the CNN features  along with Question Text features as our input features. We will fuse these vectors together by simply stacking the matrices.
+</p>
 
 <li>Image Representation:
-The CNN feature that we extracted in the above step for performing clustering (to run K-Means on) is able to capture the image features and is a good representation for our images. We will be using the same along with Question Text features as our input features. </li>
+The CNN feature that we extracted in the above step for performing clustering (to run K-Means on) is able to capture the image features and is a good representation for our images. The size of each feature vector of an image is 2048.</li>
 <li>Text Representation:
-To model question text, we will be using the bag-of-words (BOW) technique. The BOW is a way of extracting features from text (frequency) to use in modeling. 
-It involves two things, a vocabulary of known words (question vocabulary) and measure of the presence of these words.</li> 
+To model question text, we will be using the bag-of-words (BOW) technique. The BOW is a way of extracting features from text (frequency) to use in modeling. The size of the embedding of each of the questions is 3042. It involves two things, a vocabulary of known words (question vocabulary) and measure of the presence of these words.</li> 
 
 <h3>Question BOW Generation</h3>
 <p align="justify">To generate BOW for questions, we have used the following steps:</p>
 
 <li>We applied standard preprocessing steps such as tokenizing the question texts, lower-casing all the tokens and removing all punctuation marks. We did not remove stop words (like what, how etc.) as these words appear initially in many questions and sometimes are highly correlated to the answer to a question. [1] 
 </li>
-<li>After preprocessing, we get 2993 unique words in question vocabulary.</li>
-<li>Therefore, we will represent each question using a vector of size 2993, where each column represents a unique word. For each question, we put the frequency of each word present in the question text. Thus, this generates a bag-of-words for the questions in the dataset. 
+<li>After preprocessing, we get 3042 unique words in question vocabulary.</li>
+<li>Therefore, we will represent each question using a vector of size 3042, where each column represents a unique word. For each question, we put the frequency of each word present in the question text. Thus, this generates a bag-of-words for the questions in the dataset.
 </li>
 
 <h3>Answer Representation</h3>
@@ -483,9 +483,9 @@ It involves two things, a vocabulary of known words (question vocabulary) and me
 
 <li>We combined answers of all the questions together to form a large corpus. </li>
 <li>We used similar preprocessing steps (like used for questions) such as tokenizing the answer lists and removing all punctuation marks.</li> 
-<li>After the preprocessing, we get 3042 unique words in answer vocabulary.</li>
-<li>Then we count the frequency of each word in this text corpus and choose the top K most frequent words. </li>
-<li>So, we create a vector of size K for the answer label for each question. </li>
+<li>After the preprocessing, we take top-K(=3000) unique words in answer vocabulary.</li>
+<li>Then we count the frequency of each word in this text corpus and choose the top K most frequent words.</li>
+<li>So, we create a vector of size K for the answer label for each question.</li>
 <li>We represent this K sized answer label for each question by creating the vector with the count of each of  words that appear in top K words in the 10 answers.</li>
 
 <h3>Architecture</h3>
