@@ -78,12 +78,12 @@ layout: default
         
 <h4>Solution:</h4>
 <li>To identify such groups of images, we decided to perform K-means clustering on the original image dataset to generate similar clusters.</li>
-</li>After generating clusters of similar images, we manually went through each of the clusters, and discarded the clusters that seemed useless for our use case.</li>
+<li>After generating clusters of similar images, we manually went through each of the clusters, and discarded the clusters that seemed useless for our use case.</li>
 <li>The discarded clusters include clusters having blurred/ unclear images.</li>
 
 <h4>Challenge 2: </h4>    
-        <p>K-means clustering uses Euclidean distance as the metric to determine the similarity between different images. But some images might contain similar objects but they might be present in different orientations/positions/color contrasts, etc. Hence considering just the euclidean distance between the pixel values is not a good metric. 
-        </p>
+<p align="justify">K-means clustering uses Euclidean distance as the metric to determine the similarity between different images. But some images might contain similar objects but they might be present in different orientations/positions/color contrasts, etc. Hence considering just the euclidean distance between the pixel values is not a good metric. 
+</p>
 
 <h4>Solution:</h4>
 
@@ -92,7 +92,7 @@ Each CNN layer performs optimized operations like centering the objects, gray-sc
 </p>
     
 <h4>Challenge 3: </h4>   
-<p>The next challenge that we faced was to identify the correct value of K(number of clusters) to be generated.</p>
+<p align="justify">The next challenge that we faced was to identify the correct value of K(number of clusters) to be generated.</p>
 
 <h4>Solution:</h4>
 
