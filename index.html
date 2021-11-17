@@ -24,7 +24,7 @@ layout: default
         
 <p> We first ran the Inceptionv3 using CPU and GPU, with and without batching. The time taken for each of these operations are displayed in Table . 
 </p>
-
+<br/>
 <table>
   <tr>
     <th>CPU/GPU used </th>
@@ -67,7 +67,7 @@ layout: default
     <td>5m 2s</td>
   </tr>
 </table>	    
-
+<br/>
 <h2 id="Clustering">Unsupervised Algorithm:  Clustering </h2>
     
 <p>On closely examining the dataset, we observed that few images are totally blurred, few are black/white and few others just have too much flash. Hence we realised the need to clean the dataset before feeding it to our training pipeline. 
@@ -183,7 +183,7 @@ Image_name : “ “, // Image name
 <img src="Picture8.png"></img>
 
 <h4>InceptionV3_Avg_Unnormalized</h4>
-
+<br/>
 <table>
   <tr>
     <th>Value of K (Number of Clusters)</th>
@@ -230,11 +230,11 @@ Image_name : “ “, // Image name
     <td>3312151</td>
   </tr>
 </table>
-
+</br>
 <img src="Picture9.png"></img>
 
 <h4>ResNet50_Max_Normalized</h4>
-
+</br>
 <table>
   <tr>
     <th>Value of K (Number of Clusters)</th>
@@ -281,7 +281,7 @@ Image_name : “ “, // Image name
     <td>960</td>
   </tr>
 </table>
-
+<br/>
 <img src="Picture10.png"></img>
 
 <p>We finally use Inceptionv3 with max-pooling and run it on GPU using 32-sized batches. K-Means is run on these image feature vectors and based on the loss values received, we selected this architecture. 
