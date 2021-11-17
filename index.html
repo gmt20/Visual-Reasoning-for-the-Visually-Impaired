@@ -26,6 +26,7 @@ layout: default
 </p>
 <br/>
 <table>
+  <caption>Table 1: Time Taken with Different Configuration</caption>
   <tr>
     <th>CPU/GPU used </th>
     <th>Time</th>
@@ -42,6 +43,7 @@ layout: default
  </br>
 </br>
 <table>
+  <caption>Table 2: Execution Time vs Batching Size</caption>
   <tr>
     <th>Batching Sizes</th>
     <th>Time</th>
@@ -102,6 +104,7 @@ We then plotted each of these values and used the Elbow method to determine the 
 <p align="justify">The following table depicts the loss values obtained for each value of k:</p>
 
 <table>
+  <caption>Table 3: Loss Value vs Number of Clusters</caption>
     <tr>
     <th>Value of K (Number of Clusters)</th>
     <th>Loss Value</th>
@@ -150,7 +153,10 @@ We then plotted each of these values and used the Elbow method to determine the 
 
 <p align="justify">The following is the elbow curve we generated based on the above values:</p>
 
-<img src="Picture5.png"></img>
+<figure>
+  <img src="Picture5.png" alt="KMeans Elbow Curve" style="width:100%">
+  <figcaption>Figure 1: KMeans Elbow Curve</figcaption>
+</figure>
 
 <p align="justify">Hence, based on the elbow method, we obtained the accurate value of K as 60. Therefore, we generated 60 clusters. We then manually visited each of the clusters(i.e. each of the 60 folders of images), and discarded a few clusters to create a clean image dataset.
 
@@ -158,12 +164,24 @@ In this way, the dataset was reduced from 20,523 image/question pairs to 13000 i
 </p>
 
 <p align="justify">The following images show samples that were discarded:</p>
-<img src="Picture1.jpg" width="500" height="600"></img>
-<img src="Picture2.jpg" width="500" height="600"></img>
+<figure>
+  <img src="Picture1.png" alt="Discarded Cluster Sample 1" width="500" height="600">
+  <figcaption>Figure 2: Discarded Cluster Sample 1</figcaption>
+</figure>
+<figure>
+  <img src="Picture2.png" alt="Discarded Cluster Sample 2" width="500" height="600">
+  <figcaption>Figure 3: Discarded Cluster Sample 2</figcaption>
+</figure>
 
 <p align="justify">The following images show samples that were included:</p>
-<img src="Picture3.jpg" width="500" height="600"></img>
-<img src="Picture4.jpg" width="500" height="600"></img>
+<figure>
+  <img src="Picture3.png" alt="Included Cluster Sample 1" width="500" height="600">
+  <figcaption>Figure 4: Included Cluster Sample 1</figcaption>
+</figure>
+<figure>
+  <img src="Picture4.png" alt="Included Cluster Sample 2" width="500" height="600">
+  <figcaption>Figure 5: Included Cluster Sample 2</figcaption>
+</figure>
 
 
 <h4>Results of Data preprocessing</h4>
@@ -204,6 +222,7 @@ Image_name : “ “, // Image name
 <h4>InceptionV3_Max_Normalized</h4>
 
 <table>
+  <caption>Table 4: InceptionV3 Max Normalized</caption>
   <tr>
     <th>Value of K (Number of Clusters)</th>
     <th>Loss Value</th>
@@ -250,11 +269,15 @@ Image_name : “ “, // Image name
   </tr>
 </table>
 
-<img src="Picture6.png"></img>
+<figure>
+  <img src="Picture6.png" alt="KMeans Elbow Curve (InceptionV3 Max Normalized)" style="width:100%">
+  <figcaption>Figure 6: KMeans Elbow Curve (InceptionV3 Max Normalized)</figcaption>
+</figure>
 
 <h4>InceptionV3_Avg_Normalized</h4>
 
 <table>
+  <caption>Table 5: InceptionV3 Avg Normalized</caption>
   <tr>
     <th>Value of K (Number of Clusters)</th>
     <th>Loss Value</th>
@@ -301,11 +324,15 @@ Image_name : “ “, // Image name
   </tr>
 </table>
 
-<img src="Picture7.png"></img>
+<figure>
+  <img src="Picture7.png" alt="KMeans Elbow Curve (InceptionV3 Avg Normalized)" style="width:100%">
+  <figcaption>Figure 7: KMeans Elbow Curve (InceptionV3 Avg Normalized)</figcaption>
+</figure>
 
 <h4>InceptionV3_Max_Unnormalized</h4>
 
 <table>
+  <caption>Table 6: InceptionV3 Max Unnormalized</caption>
   <tr>
     <th>Value of K (Number of Clusters)</th>
     <th>Loss Value</th>
@@ -352,11 +379,15 @@ Image_name : “ “, // Image name
   </tr>
 </table>
 
-<img src="Picture8.png"></img>
+<figure>
+  <img src="Picture8.png" alt="KMeans Elbow Curve (InceptionV3 Max Unnormalized)" style="width:100%">
+  <figcaption>Figure 8: KMeans Elbow Curve (InceptionV3 Max Unnormalized)</figcaption>
+</figure>
 
 <h4>InceptionV3_Avg_Unnormalized</h4>
 <br/>
 <table>
+  <caption>Table 7: InceptionV3 Avg Unnormalized</caption>
   <tr>
     <th>Value of K (Number of Clusters)</th>
     <th>Loss Value</th>
@@ -403,11 +434,15 @@ Image_name : “ “, // Image name
   </tr>
 </table>
 </br>
-<img src="Picture9.png"></img>
+<figure>
+  <img src="Picture9.png" alt="KMeans Elbow Curve (InceptionV3 Avg Unnormalized)" style="width:100%">
+  <figcaption>Figure 9: KMeans Elbow Curve (InceptionV3 Avg Unnormalized)</figcaption>
+</figure>
 
 <h4>ResNet50_Max_Normalized</h4>
 </br>
 <table>
+  <caption>Table 8: ResNet50 Max Normalized</caption>
   <tr>
     <th>Value of K (Number of Clusters)</th>
     <th>Loss Value</th>
@@ -454,7 +489,10 @@ Image_name : “ “, // Image name
   </tr>
 </table>
 <br/>
-<img src="Picture10.png"></img>
+<figure>
+  <img src="Picture10.png" alt="KMeans Elbow Curve (ResNet50 Max Normalized)" style="width:100%">
+  <figcaption>Figure 7: KMeans Elbow Curve (ResNet50 Max Normalized)</figcaption>
+</figure>
 
 <p align="justify">We finally use Inceptionv3 with max-pooling and run it on GPU using 32-sized batches. K-Means is run on these image feature vectors and based on the loss values received, we selected this architecture. 
 </p>
