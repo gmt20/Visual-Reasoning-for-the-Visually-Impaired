@@ -6,11 +6,11 @@ layout: default
       <h1 id="cs7641-project" align="center">CS7641 - Project Team 17</h1>
 
 <h2 id="introductionbackground">Introduction</h2>
-<p>At present, the visually impaired people use a simple stick for navigation. However, the use of such a stick does not enable them to navigate independently. If they ever get into an unknown environment, the most that they can do, without any external help, is detect stationary obstacles around them. Unfortunately, they cannot make any decision based on a comprehensive understanding of the environment.</p>
-<p>To address this problem, we intend to develop a Machine Learning model for generating accurate visual understanding of a given scene. A model of this kind can potentially be integrated into an e-stick which assists the visually impaired and enables them to move with the same ease and confidence as normally sighted people.</p>
+<p align="justify">At present, the visually impaired people use a simple stick for navigation. However, the use of such a stick does not enable them to navigate independently. If they ever get into an unknown environment, the most that they can do, without any external help, is detect stationary obstacles around them. Unfortunately, they cannot make any decision based on a comprehensive understanding of the environment.</p>
+<p align="justify">To address this problem, we intend to develop a Machine Learning model for generating accurate visual understanding of a given scene. A model of this kind can potentially be integrated into an e-stick which assists the visually impaired and enables them to move with the same ease and confidence as normally sighted people.</p>
 
 <h2 id="problemstatement">Problem Definition</h2>
-<p>Our project aims at developing a software framework that can detect objects from images and then answer questions based on the content of those images. From a big picture perspective, this project is a stepping stone towards engineering a system that can capture real-time images to provide high-level contextual information about the surroundings. In the future, combining such a system with a mapping and navigation module and integrating into an e-stick would enable the visually impaired to navigate independently.</p>
+<p align="justify">Our project aims at developing a software framework that can detect objects from images and then answer questions based on the content of those images. From a big picture perspective, this project is a stepping stone towards engineering a system that can capture real-time images to provide high-level contextual information about the surroundings. In the future, combining such a system with a mapping and navigation module and integrating into an e-stick would enable the visually impaired to navigate independently.</p>
 	
 <h3 id="VQA">Dataset</h3>  
       
@@ -553,6 +553,15 @@ We concatenate the BOW questions and images (2048 + 3042), to get a resultant ve
 </p>
 <li>We plan to use other CNN architectures such as ResNet and check if we can arrive at better results.</li>
 <li>We plan to use the LSTM for representing our question text data. Unlike the bag of words technique we use currently, LSTM will be able to take meaning in consideration. If we use appropriate layers of embedding and encoding in LSTM, the model will be able to find out the actual meaning in input string and will give the most accurate output class.</li>
+
+<h2>References</h3>
+<li>Antol, S., Agrawal, A., Lu, J., Mitchell, M., Batra, D., Zitnick, C. L., & Parikh, D. (2015). Vqa: Visual question answering. In Proceedings of the IEEE international conference on computer vision (pp. 2425-2433).</li>
+<li>Szegedy, C., Vanhoucke, V., Ioffe, S., Shlens, J., & Wojna, Z. (2016). Rethinking the inception architecture for computer vision. In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 2818-2826).</li>
+<li>He, K., Zhang, X., Ren, S., & Sun, J. (2016). Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 770-778).</li>
+<li>Ilievski, I., & Feng, J. (2017). A simple loss function for improving the convergence and accuracy of visual question answering models. arXiv preprint arXiv:1708.00584.</li>
+<li>Dushi, D. (2019). Using Deep Learning to Answer Visual Questions from Blind People.</li>
+<li>Zeeshan Saquib, et. al.BlinDar: An Invisible Eye for the Blind People, IEEE International Conference On Recent Trends In Electronics Information Communication Technology, India, May 2017.</li>
+<li><a href="https://www.image-net.org">ImageNet</a>
 
 </body>
     
