@@ -468,7 +468,7 @@ The CNN feature that we extracted in the above step for performing clustering (t
 To model question text, we will be using the bag-of-words (BOW) technique. The BOW is a way of extracting features from text (frequency) to use in modeling. 
 It involves two things, a vocabulary of known words (question vocabulary) and measure of the presence of these words.</li> 
 
-<h3>Question BOW Generation:</h3>
+<h3>Question BOW Generation</h3>
 <p align="justify">To generate BOW for questions, we have used the following steps:</p>
 
 <li>We applied standard preprocessing steps such as tokenizing the question texts, lower-casing all the tokens and removing all punctuation marks. We did not remove stop words (like what, how etc.) as these words appear initially in many questions and sometimes are highly correlated to the answer to a question. [1] 
@@ -477,7 +477,7 @@ It involves two things, a vocabulary of known words (question vocabulary) and me
 <li>Therefore, we will represent each question using a vector of size 2993, where each column represents a unique word. For each question, we put the frequency of each word present in the question text. Thus, this generates a bag-of-words for the questions in the dataset. 
 </li>
 
-<h3>Answer Representation:</h3>
+<h3>Answer Representation</h3>
 <p align="justify">Similar to Question text representation, we also need to model answer text. The unique thing about the Vizwiz dataset is that for each question, we have 10 answers that are annotated. So we have multiple ground truth labels for each question. We decided not to use One hot encoding because that would lead to very high dimensional label vectors, blowing up the feature space making the model suffer from the curse of dimensionality. Thus, we followed the following steps:
 </p>
 
@@ -487,6 +487,11 @@ It involves two things, a vocabulary of known words (question vocabulary) and me
 <li>Then we count the frequency of each word in this text corpus and choose the top K most frequent words. </li>
 <li>So, we create a vector of size K for the answer label for each question. </li>
 <li>We represent this K sized answer label for each question by creating the vector with the count of each of  words that appear in top K words in the 10 answers.</li>
+
+<h3>Architecture</h3>
+<p align="justify">As discussed in the training pipeline, we have the image + question embedding for each of the (image, question) pairs. For image embeddings, we use the frozen parameters from the Inceptionv3 model learned on ImageNet classification, and no fine-tuning was performed. 
+We concatenate the BOW questions and images (2048 + 3042), to get a resultant vector of dimension 5090. We use this combined input for the Multi-Layer Perceptron (MLP). MLP is a fully connected neural network classifier consisting of 3 hidden layers with 5090 hidden units. We use ReLU for activation, which is finally followed by a  log softmax layer to obtain a probability distribution over the top K answers. Cross-entropy loss is used to compute loss for our model.
+</p>
 
 </body>
     
