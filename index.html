@@ -530,6 +530,10 @@ To model question text, we will be using the bag-of-words (BOW) technique. The B
 <p align="justify">As discussed in the training pipeline, we have the image + question embedding for each of the (image, question) pairs. For image embeddings, we use the frozen parameters from the Inceptionv3 model learned on ImageNet classification, and no fine-tuning was performed. 
 We concatenate the BOW questions and images (2048 + 3042), to get a resultant vector of dimension 5090. We use this combined input for the Multi-Layer Perceptron (MLP). MLP is a fully connected neural network classifier consisting of 3 hidden layers with 5090 hidden units. We use ReLU for activation, which is finally followed by a  log softmax layer to obtain a probability distribution over the top K answers. Cross-entropy loss is used to compute loss for our model.
 </p>
+<figure>
+  <img src="Picture11.png" alt="Training Pipeline Architecture" style="width:100%">
+  <figcaption>Figure 11: Training Pipeline Architecture</figcaption>
+</figure>
 
 </body>
     
