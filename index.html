@@ -9,7 +9,7 @@ layout: default
 <h3 id="VQA">Visual Question Answering for Visually Impaired
 </h3>  
         
-<p align="justify">To resolve the visual challenges faced by the visually impaired people in their day-to-day lives, we present a Machine Learning model based on the Vizwiz dataset. The training dataset consists of photos taken by the blind people annotated with the question asked relevant to that image. Each annotation question  also consists of answers and answer types specified by 10 people for each sample. This provides an opportunity as well a challenge to assist the visually impaired to help them in navigation, assisting their daily life tasks and answering their visual questions etc. The original Vizwiz dataset consisted of :
+<p>To resolve the visual challenges faced by the visually impaired people in their day-to-day lives, we present a Machine Learning model based on the Vizwiz dataset. The training dataset consists of photos taken by the blind people annotated with the question asked relevant to that image. Each annotation question  also consists of answers and answer types specified by 10 people for each sample. This provides an opportunity as well a challenge to assist the visually impaired to help them in navigation, assisting their daily life tasks and answering their visual questions etc. The original Vizwiz dataset consisted of :
 </p>
 <li>20,523 training image/question pairs</li>
 <li>4,319 validation image/question pairs</li>
@@ -19,10 +19,10 @@ layout: default
         
 <h3> Feature Extraction using Convolutional Neural Networks </h3>       
         
-<p align="justify">We use transfer learning to create feature vectors for the images present in the dataset. The activations from the last layer of different 3 pre-trained models like Inceptionv3, ResNet (Residual Network) and VGG16 (Very Deep Convolutional Networks for Large-Scale Image Recognition), which are state-of-the-art and are widely used. These models are pre-trained on ImageNet, which is a huge image dataset containing more than 14 million images. Hence, they can be used for our task to create feature vectors of the images considered for our task from the Vizwiz dataset.
+<p>We use transfer learning to create feature vectors for the images present in the dataset. The activations from the last layer of different 3 pre-trained models like Inceptionv3, ResNet (Residual Network) and VGG16 (Very Deep Convolutional Networks for Large-Scale Image Recognition), which are state-of-the-art and are widely used. These models are pre-trained on ImageNet, which is a huge image dataset containing more than 14 million images. Hence, they can be used for our task to create feature vectors of the images considered for our task from the Vizwiz dataset.
 </p>       
         
-<p align="justify"> We first ran the Inceptionv3 using CPU and GPU, with and without batching. The time taken for each of these operations are displayed in Table . 
+<p> We first ran the Inceptionv3 using CPU and GPU, with and without batching. The time taken for each of these operations are displayed in Table . 
 </p>
 <br/>
 <table>
@@ -70,68 +70,111 @@ layout: default
 <br/>
 <h2 id="Clustering">Unsupervised Algorithm:  Clustering </h2>
     
-<p align="justify">On closely examining the dataset, we observed that few images are totally blurred, few are black/white and few others just have too much flash. Hence we realised the need to clean the dataset before feeding it to our training pipeline. 
+<p>On closely examining the dataset, we observed that few images are totally blurred, few are black/white and few others just have too much flash. Hence we realised the need to clean the dataset before feeding it to our training pipeline. 
 </p>
 
 <h4>Challenge 1: </h4>
         <p>The first challenge that we faced is how to identify the images to be discarded.</p>
         
 <h4>Solution:</h4>
-<li align="justify">To identify such groups of images, we decided to perform K-means clustering on the original image dataset to generate similar clusters.</li>
-<li align="justify">After generating clusters of similar images, we manually went through each of the clusters, and discarded the clusters that seemed useless for our use case.</li>
-<li align="justify">The discarded clusters include clusters having blurred/ unclear images.</li>
+<li>To identify such groups of images, we decided to perform K-means clustering on the original image dataset to generate similar clusters.</li>
+</li>After generating clusters of similar images, we manually went through each of the clusters, and discarded the clusters that seemed useless for our use case.</li>
+<li>The discarded clusters include clusters having blurred/ unclear images.</li>
 
 <h4>Challenge 2: </h4>    
-<p align="justify">K-means clustering uses Euclidean distance as the metric to determine the similarity between different images. But some images might contain similar objects but they might be present in different orientations/positions/color contrasts, etc. Hence considering just the euclidean distance between the pixel values is not a good metric. 
-</p>
+        <p>K-means clustering uses Euclidean distance as the metric to determine the similarity between different images. But some images might contain similar objects but they might be present in different orientations/positions/color contrasts, etc. Hence considering just the euclidean distance between the pixel values is not a good metric. 
+        </p>
 
 <h4>Solution:</h4>
 
-<p align="justify">We used CNN to detect and classify the objects and accordingly performed the clustering on these CNN generated feature vectors.
+<p>We used CNN to detect and classify the objects and accordingly performed the clustering on these CNN generated feature vectors.
 Each CNN layer performs optimized operations like centering the objects, gray-scale conversion(normalization), detecting the objects, and accordingly classifying and clustering the images.
 </p>
     
 <h4>Challenge 3: </h4>   
-<p align="justify">The next challenge that we faced was to identify the correct value of K(number of clusters) to be generated.</p>
+<p>The next challenge that we faced was to identify the correct value of K(number of clusters) to be generated.</p>
 
 <h4>Solution:</h4>
 
-<p align="justify">To identify the accurate number of clusters to be considered, we calculated the loss values for a variety of distinct K values.
+<p>To identify the accurate number of clusters to be considered, we calculated the loss values for a variety of distinct K values.
 We then plotted each of these values and used the Elbow method to determine the best value of K to be considered for our use case.</p>
 
-<p align="justify">The following table depicts the loss values obtained for each value of k:</p>
+<p>The following table depicts the loss values obtained for each value of k:</p>
 
 <table>
-    
+    <tr>
+    <th>Value of K (Number of Clusters)</th>
+    <th>Loss Value</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>7674</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>7501</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>7411</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>7268</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>7051</td>
+  </tr>
+  <tr>
+    <td>20</td>
+    <td>6830</td>
+  </tr>
+  <tr>
+    <td>40</td>
+    <td>6612</td>
+  </tr>
+  <tr>
+    <td>60</td>
+    <td>6477</td>
+  </tr>
+  <tr>
+    <td>300</td>
+    <td>5957</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>5494</td>
+  </tr>
 </table>
 
-<p align="justify">The following is the elbow curve we generated based on the above values:</p>
+<p>The following is the elbow curve we generated based on the above values:</p>
 
 <img src="Picture5.png"></img>
 
-<p align="justify">Hence, based on the elbow method, we obtained the accurate value of K as 60. Therefore, we generated 60 clusters. We then manually visited each of the clusters(i.e. each of the 60 folders of images), and discarded a few clusters to create a clean image dataset.
+<p>Hence, based on the elbow method, we obtained the accurate value of K as 60. Therefore, we generated 60 clusters. We then manually visited each of the clusters(i.e. each of the 60 folders of images), and discarded a few clusters to create a clean image dataset.
 
 In this way, the dataset was reduced from 20,523 image/question pairs to 13000 image/question pairs.
 </p>
 
-<p align="justify">The following images show samples that were discarded:</p>
+<p>The following images show samples that were discarded:</p>
 <img src="Picture1.jpg"></img>
 <img src="Picture2.jpg"></img>
 
-<p align="justify">The following images show samples that were included:</p>
+<p>The following images show samples that were included:</p>
 <img src="Picture3.jpg"></img>
 <img src="Picture4.jpg"></img>
 
 
 <h4>Results of Data preprocessing</h4>
-<p align="justify">To overcome challenges 1,2 and 3 we ran K-means on feature vectors generated by a forward pass of a Convolutional Neural Network to generate 60 clusters, and out of those 60 clusters, we kept 29 clusters and discarded the rest based on the reasoning provided before, thus generating a dataset consisting of 13000 image/question pairs. 
+<p>To overcome challenges 1,2 and 3 we ran K-means on feature vectors generated by a forward pass of a Convolutional Neural Network to generate 60 clusters, and out of those 60 clusters, we kept 29 clusters and discarded the rest based on the reasoning provided before, thus generating a dataset consisting of 13000 image/question pairs. 
 </p>
 
 <h4>Annotation Script</h4>
 
-<p align="justify">After generating 29 folders(clusters), we had to use only the images from these folders. To uniquely read images from 29 out of 60 folders, we wrote an annotation script.
+<p>After generating 29 folders(clusters), we had to use only the images from these folders. To uniquely read images from 29 out of 60 folders, we wrote an annotation script.
 </p>
-<p align="justify">The script reads the annotation json file, which consists of the following structure:</p>
+<p>The script reads the annotation json file, which consists of the following structure:</p>
 
 <pre class="line-numbers">
    <code class="language-css">
@@ -147,20 +190,67 @@ Image_name : “ “, // Image name
   </code>
 </pre>
 
-<p align="justify">From this file, only those images will be considered that are present in the 29 clusters, and for those image names, we read questions and answers associated with them. All this data is then loaded into a new json file.
+<p>From this file, only those images will be considered that are present in the 29 clusters, and for those image names, we read questions and answers associated with them. All this data is then loaded into a new json file.
 </p>
-<p align="justify">This new json file is then used for further processing.</p>
+<p>This new json file is then used for further processing.</p>
 </p>
 
 <h3>Average and Max Pooling</h3>
 
-<p align="justify">We also experimented taking max pooling and average pooling post the convolution layers, the results of which are shared in Table.
+<p>We also experimented taking max pooling and average pooling post the convolution layers, the results of which are shared in Table.
 </p>
 
 <h3>Resnet V/s Inception V/s VGG16</h3>
 <h4>InceptionV3_Max_Normalized</h4>
 
+<p>Loss Values:  [7691.446390113959, 7507.774507255225, 7391.517725536679, 7226.133910619914, 6991.397552682225, 6746.565646699269, 6499.366045281326, 6356.497762813506, 5795.658596714202, 5321.662363185365]
+</p>
+
 <table>
+  <tr>
+    <th>Value of K (Number of Clusters)</th>
+    <th>Loss Value</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>7691</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>7508</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>7392</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>7226</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>6991</td>
+  </tr>
+  <tr>
+    <td>20</td>
+    <td>6747</td>
+  </tr>
+  <tr>
+    <td>40</td>
+    <td>6499</td>
+  </tr>
+  <tr>
+    <td>60</td>
+    <td>6356</td>
+  </tr>
+  <tr>
+    <td>300</td>
+    <td>5796</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>5322</td>
+  </tr>
 </table>
 
 <img src="Picture6.png"></img>
@@ -168,6 +258,50 @@ Image_name : “ “, // Image name
 <h4>InceptionV3_Avg_Normalized</h4>
 
 <table>
+  <tr>
+    <th>Value of K (Number of Clusters)</th>
+    <th>Loss Value</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>11171</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>10832</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>10630</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>10307</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>9913</td>
+  </tr>
+  <tr>
+    <td>20</td>
+    <td>9508</td>
+  </tr>
+  <tr>
+    <td>40</td>
+    <td>9046</td>
+  </tr>
+  <tr>
+    <td>60</td>
+    <td>8788</td>
+  </tr>
+  <tr>
+    <td>300</td>
+    <td>7813</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>7029</td>
+  </tr>
 </table>
 
 <img src="Picture7.png"></img>
@@ -175,6 +309,50 @@ Image_name : “ “, // Image name
 <h4>InceptionV3_Max_Unnormalized</h4>
 
 <table>
+  <tr>
+    <th>Value of K (Number of Clusters)</th>
+    <th>Loss Value</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>114840986</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>10739880</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>105134892</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>102756470</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>99803204</td>
+  </tr>
+  <tr>
+    <td>20</td>
+    <td>96764906</td>
+  </tr>
+  <tr>
+    <td>40</td>
+    <td>93636811</td>
+  </tr>
+  <tr>
+    <td>60</td>
+    <td>91779277</td>
+  </tr>
+  <tr>
+    <td>300</td>
+    <td>84182650</td>
+  </tr>
+  <tr>
+    <td>1000</td>
+    <td>76288868</td>
+  </tr>
 </table>
 
 <img src="Picture8.png"></img>
@@ -281,7 +459,7 @@ Image_name : “ “, // Image name
 <br/>
 <img src="Picture10.png"></img>
 
-<p align="justify">We finally use Inceptionv3 with max-pooling and run it on GPU using 32-sized batches. K-Means is run on these image feature vectors and based on the loss values received, we selected this architecture. 
+<p>We finally use Inceptionv3 with max-pooling and run it on GPU using 32-sized batches. K-Means is run on these image feature vectors and based on the loss values received, we selected this architecture. 
 </p>
 
 </body>
