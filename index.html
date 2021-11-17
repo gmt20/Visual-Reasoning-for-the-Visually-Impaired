@@ -110,5 +110,58 @@ Image_name : “ “, // Image name
 </p>
 <p>This new json file is then used for further processing.</p>
 </p>
+
+<h3>Average and Max Pooling</h3>
+
+<p>We also experimented taking max pooling and average pooling post the convolution layers, the results of which are shared in Table.
+</p>
+
+<h3>Resnet V/s Inception V/s VGG16</h3>
+<h4>InceptionV3_Max_Normalized</h4>
+
+<p>Loss Values:  [7691.446390113959, 7507.774507255225, 7391.517725536679, 7226.133910619914, 6991.397552682225, 6746.565646699269, 6499.366045281326, 6356.497762813506, 5795.658596714202, 5321.662363185365]
+</p>
+
+<table>
+</table>
+
+<img>
+</img>
+
+<h4>InceptionV3_Avg_Normalized</h4>
+
+<table>
+</table>
+
+<img>
+</img>
+
+<h4>InceptionV3_Max_Unnormalized</h4>
+
+<table>
+</table>
+
+<img>
+</img>
+
+<h4>InceptionV3_Avg_Unnormalized</h4>
+
+<table>
+</table>
+
+<img>
+</img>
+
+<h4>ResNet50_Max_Normalized</h4>
+
+<table>
+</table>
+
+<img>
+</img>
+
+<p>We finally use Inceptionv3 with max-pooling and run it on GPU using 32-sized batches. K-Means is run on these image feature vectors and based on the loss values received, we selected this architecture. 
+</p>
+
 </body>
     
