@@ -28,7 +28,8 @@ layout: default
 <p align="justify">We use transfer learning to create feature vectors for the images present in the dataset. The activations from the last layer of different 3 pre-trained models like Inceptionv3, ResNet (Residual Network) and VGG16 (Very Deep Convolutional Networks for Large-Scale Image Recognition), which are state-of-the-art and are widely used. These models are pre-trained on ImageNet, which is a huge image dataset containing more than 14 million images. Hence, they can be used for our task to create feature vectors of the images considered for our task from the Vizwiz dataset.
 </p>       
         
-<p align="justify"> We first ran the Inceptionv3 using CPU and GPU, with and without batching. The time taken for each of these operations are displayed in Table . 
+<p align="justify"> We first ran the Inceptionv3 using CPU and GPU, with and without batching. The time taken for each of these operations are displayed in Table 1.
+	We also tried out different batching sizes while running the feature extraction, this information is displayed in Table 2. 
 </p>
 <br/>
 <table>
@@ -221,7 +222,7 @@ Image_name : “ “, // Image name
 
 <h3>Average and Max Pooling</h3>
 
-<p align="justify">We also experimented taking max pooling and average pooling post the convolution layers, the results of which are shared in Table.
+<p align="justify">We also experimented taking max pooling and average pooling post the convolution layers for both Inceptionv3 and ResNet models, the results of which are shared in Tables 4, 5, 6, 7 and 8.
 </p>
 
 <h3>Resnet V/s Inception V/s VGG16</h3>
