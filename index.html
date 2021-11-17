@@ -68,7 +68,7 @@ We then plotted each of these values and used the Elbow method to determine the 
 
 <p>The following is the elbow curve we generated based on the above values:</p>
 
-<img></img>
+<img src="Picture5.jpg"></img>
 
 <p>Hence, based on the elbow method, we obtained the accurate value of K as 60. Therefore, we generated 60 clusters. We then manually visited each of the clusters(i.e. each of the 60 folders of images), and discarded a few clusters to create a clean image dataset.
 
@@ -77,9 +77,11 @@ In this way, the dataset was reduced from 20,523 image/question pairs to 13000 i
 
 <p>The following images show samples that were discarded:</p>
 <img src="Picture1.jpg"></img>
+<img src="Picture2.jpg"></img>
 
 <p>The following images show samples that were included:</p>
-<img></img>
+<img src="Picture3.jpg"></img>
+<img src="Picture4.jpg"></img>
 
 
 <h4>Results of Data preprocessing</h4>
@@ -125,40 +127,35 @@ Image_name : “ “, // Image name
 <table>
 </table>
 
-<img>
-</img>
+<img src="Picture6.jpg"></img>
 
 <h4>InceptionV3_Avg_Normalized</h4>
 
 <table>
 </table>
 
-<img>
-</img>
+<img src="Picture7.jpg"></img>
 
 <h4>InceptionV3_Max_Unnormalized</h4>
 
 <table>
 </table>
 
-<img>
-</img>
+<img src="Picture8.jpg"></img>
 
 <h4>InceptionV3_Avg_Unnormalized</h4>
 
 <table>
 </table>
 
-<img>
-</img>
+<img src="Picture9.jpg"></img>
 
 <h4>ResNet50_Max_Normalized</h4>
 
 <table>
 </table>
 
-<img>
-</img>
+<img src="Picture10.jpg"></img>
 
 <p>We finally use Inceptionv3 with max-pooling and run it on GPU using 32-sized batches. K-Means is run on these image feature vectors and based on the loss values received, we selected this architecture. 
 </p>
