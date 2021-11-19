@@ -6,22 +6,25 @@ from torch.nn.utils.rnn import pack_padded_sequence
 
 
 class SimpleNet(nn.Module):
-    '''Simple Network with atleast 2 conv2d layers and two linear layers.'''
+    '''
+    Simple Fully Connected Network with 4 hidden fully connected linear layers
+    '''
 
     def __init__(self):
         '''
-        Init function to define the layers and loss function
+        Init function to define the linear layers
+        "torch.nn.Linear(A,B)" ---> defines a linear fully connected layer of input feature dimension "A" and output feature dimension "B"
+        Number of hidden neurons in above linear layer = B (each neuron in hidden layer produces 1 output feature)
 
-        Note: Use 'sum' reduction in the loss_criterion. Read Pytorch documention to understand what it means
-
-        Hints:
-        1. Refer to https://pytorch.org/docs/stable/nn.html for layers
-        2. Remember to use non-linearities in your network. Network without
-        non-linearities is not deep.
+        Args: None
+        Return: None
         '''
-        super().__init__()
 
-        self.linear_1 = torch.nn.Linear(5090, 5000)
+        super().__init__()                              # How to use super() ---> https://realpython.com/python-super/
+
+        # Dimensions of output features (number of neurons) was set arbitrarily for each of the four hidden fully connected layers
+        # Feel free to play around with the number of neurons in each layer and total number of layers 
+        self.linear_1 = torch.nn.Linear(5090, 5000)     
         self.linear_2 = torch.nn.Linear(5000, 4500)
         self.linear_3 = torch.nn.Linear(4500, 4000)
         self.linear_4 = torch.nn.Linear(4000, 3500)
@@ -29,6 +32,16 @@ class SimpleNet(nn.Module):
 
 
     def forward(self, combined):
+        '''
+        Forward function which performs the forward pass on a single batch of input data
+        
+        Experimented with relu / tanh / sigmoid ---> relu helps to converge the loss function quickly within less number of epochs
+
+        Observe that there is no non-linear activation after self.linear_5 ---> this is because we apply log_softmax on the output of the final layer (defined in "calculate_loss" function in train_dataloader.py)
+        
+        Args: combined ---> one batch of input data
+        Return: output tensor of dimension (3000,) 
+        '''
 
         out = self.linear_1(combined)
         out = F.relu(out)
