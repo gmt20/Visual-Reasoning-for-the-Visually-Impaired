@@ -535,7 +535,7 @@ To model question text, we will be using the bag-of-words (BOW) technique. The B
 
 <h3>Architecture</h3>
 <p align="justify">As discussed in the training pipeline, we have the image + question embedding for each of the (image, question) pairs. For image embeddings, we use the frozen parameters from the Inceptionv3 model learned on ImageNet classification, and no fine-tuning was performed. 
-We concatenate the BOW questions and images (2048 + 3042), to get a resultant vector of dimension 5090. We use this combined input for the Multi-Layer Perceptron (MLP). MLP is a fully connected neural network classifier consisting of 3 hidden layers with 5090 hidden units. We use ReLU for activation, which is finally followed by a  log softmax layer to obtain a probability distribution over the top K answers. Since the VizWiz dataset has 10 ground-truth answers for each training instance, we use a "soft" cross-entropy loss so that the model optimises the weights by considering each ground-truth answer. The team is currently working on the outlined MLP pipeline which we plan to use as a baseline for future extensions. 
+We concatenate the BOW questions and images (2048 + 3042), to get a resultant vector of dimension 5090. We use this combined input for the Multi-Layer Perceptron (MLP). MLP is a fully connected neural network classifier consisting of 4 hidden layers with 5090 hidden units. We use ReLU for activation, which is finally followed by a  log softmax layer to obtain a probability distribution over the top K answers. Since the VizWiz dataset has 10 ground-truth answers for each training instance, we use a "soft" cross-entropy loss so that the model optimises the weights by considering each ground-truth answer. The team is currently working on the outlined MLP pipeline which we plan to use as a baseline for future extensions. 
 </p>
 <figure>
   <img src="Picture11.png" alt="Training Pipeline Architecture" style="width:100%">
@@ -549,14 +549,15 @@ We concatenate the BOW questions and images (2048 + 3042), to get a resultant ve
 <h3>Preliminary Results</h3>
 <p align="justify">The following are the preliminary results of training on randomly selected samples from the filtered VizWiz dataset.
 </p>
-<li>Epochs: 50, Training instances: 100, Optimiser: Adam</li>
+<li>Epochs: 150, Training Instances: 10000, Validation Instances: 3108, Optimiser: Adam, Learning Rate: 1e-6</li>
+<li>Hidden Layers: 4, Activation: ReLU</li>
 <figure>
-  <img src="D100_E50_H3_LR1e-2.png" alt="Preliminary Results" style="width:100%">
-  <figcaption align="center">Figure 12: Learning Rate = 1e-2</figcaption>
+  <img src="e150_h4_lr1e-6_b128_norm_train.png" alt="Preliminary Results" style="width:100%">
+  <figcaption align="center">Figure 12: Train Loss</figcaption>
 </figure>
 <figure>
-  <img src="D100_E50_H3_LR1e-6.png" alt="Preliminary Results" style="width:100%">
-  <figcaption align="center">Figure 13: Learning Rate = 1e-6</figcaption>
+  <img src="e150_h4_lr1e-6_b128_norm_val.png" alt="Preliminary Results" style="width:100%">
+  <figcaption align="center">Figure 13: Validation Loss</figcaption>
 </figure>
 
 <h3>Future Scope</h3>
