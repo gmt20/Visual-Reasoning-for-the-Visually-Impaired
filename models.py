@@ -6,7 +6,6 @@ Authors: Angana Borah, Devshree Bharatia, Dimitri Adhikary, Megha Thukral, Yusuf
 Script Summary: Define various deep network architectures which will be used for the VQA task
 '''
 
-
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -25,8 +24,10 @@ class SimpleNet(nn.Module):
         "torch.nn.Linear(A,B)" ---> defines a linear fully connected layer of input feature dimension "A" and output feature dimension "B"
         Number of hidden neurons in above linear layer = B (each neuron in hidden layer produces 1 output feature)
 
-        Args: None
-        Return: None
+        Args: 
+            None
+        Return: 
+            None
         '''
 
         super().__init__()                              # How to use super() ---> https://realpython.com/python-super/
@@ -48,8 +49,10 @@ class SimpleNet(nn.Module):
 
         Observe that there is no non-linear activation after self.linear_5 ---> this is because we apply log_softmax on the output of the final layer (defined in "calculate_loss" function in train_dataloader.py)
         
-        Args: combined ---> one batch of input data
-        Return: output tensor of dimension (3000,) 
+        Args: 
+            combined ---> one batch of input data (tensor which has the image_features and question_BOW combined)
+        Return: 
+            output tensor of dimension (3000,) 
         '''
 
         out = self.linear_1(combined)
