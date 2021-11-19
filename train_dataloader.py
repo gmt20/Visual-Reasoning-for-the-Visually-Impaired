@@ -193,7 +193,7 @@ def vqa_accuracy(predicted, true):
 
 
 
-def main(NUM_EPOCHS, BATCH_SIZE, LEARNING_RATE, TRAIN_SAMPLES, VAL_SAMPLES, SAVE_TENSORBOARD_VAL):
+def main(NUM_EPOCHS, BATCH_SIZE, LEARNING_RATE, TRAIN_SAMPLES, VAL_SAMPLES, DATA_PATH, SAVE_TENSORBOARD_VAL):
     '''
     Main function which detects GPU, loads VizWiz PyTorch dataset and dataloaders, performs training and evaluation and saves loss values for tensorboard visuaisation (if required)
 
@@ -203,6 +203,7 @@ def main(NUM_EPOCHS, BATCH_SIZE, LEARNING_RATE, TRAIN_SAMPLES, VAL_SAMPLES, SAVE
         LEARNING_RATE: learnign rate for Adam optimsier (float)
         TRAIN_SAMPLES: size of training set (int)
         VAL_SAMPLES: size of validation set (int)
+        DATA_PATH: absolute path of pkl_files directory (str) 
         SAVE_TENSORBOARD_VAL: flag variable which decides if tensorbaord visualisation is required or not (str: 'yes'/ 'no')
 
     Returns:
@@ -226,28 +227,50 @@ def main(NUM_EPOCHS, BATCH_SIZE, LEARNING_RATE, TRAIN_SAMPLES, VAL_SAMPLES, SAVE
     # -------------------------------------------------------------------------------------------------------------------
     # Setup PyTorch Dataset and Dataloader from the filtered VizWiz Dataset
 
-    data_path = __location__ = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))   # get the path directory of the current folder which will be subsequently used for loading the dataset
-    
-    VizWiz_dataset = dataset.VizWiz_VQA_Dataset(data_path)                              # Load the PyTorch dataset (refer to dataset.py for more details)
+    print("\n Loading the Dataset ...")
 
+    VizWiz_dataset = dataset.VizWiz_VQA_Dataset(DATA_PATH)                              # Load the PyTorch dataset (refer to dataset.py for more details) by loading the pkl files from the directory entered in the terminal
+
+    print("\n Dataset Loaded !")
+
+    print("\n Creating Training and Validation splits ...")
+    
     train_set, val_set = random_split(VizWiz_dataset, [TRAIN_SAMPLES, VAL_SAMPLES])     # Randomly split the loaded dataset into training set and validation | No.of samples in each set is specified in command terminal while running the script 
+
+    print("\n Training and Validation splits created !")
+
+    print("\n Creating PyTorch dataloaders for training and validation sets ...")
 
     train_loader = DataLoader(train_set, batch_size = BATCH_SIZE, shuffle = True, num_workers = 4)          # Create training PyTorch dataloader (for setting up batched_data) using the training set loaded earlier 
 
     val_loader = DataLoader(val_set, batch_size = BATCH_SIZE, shuffle = True, num_workers = 4)              # Create validation PyTorch dataloader (for setting up batched_data) using the validation set loaded earlier 
 
+    print("\n PyTorch dataloaders for training and validation sets created !")
+    
     LEN_TRAIN_SET = len(train_set)                                                                          # Number of samples in training set
     LEN_VAL_SET = len(val_set)                                                                              # Number of samples in validation set
-    
+
     # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------    
     # Instantiate the SimpleNet() MLP fully connected network, Adam optimiser 
 
+    print("\n Setting up Deep Network...")
+
     model = models.SimpleNet()
+
+    print("\n Deep Network instantiated !")
     
     if torch.cuda.is_available():
         model.to(GPU_DEVICE)                                                                                # Transfer model to gpu for fast computation, if GPU is available 
+        print("\n Model transferred to GPU !")
+    
+    else: 
+        print("\n Model attached to CPU as GPU not found !")
+
+    print("\n Setting up Adam optimiser...")
 
     optimizer = torch.optim.Adam(model.parameters(), lr = LEARNING_RATE)
+
+    print("\n Optimiser instantiated !")
     
     # ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     # Perform training and save epoch loss values for tensorboard visualisation (if required)
@@ -256,6 +279,8 @@ def main(NUM_EPOCHS, BATCH_SIZE, LEARNING_RATE, TRAIN_SAMPLES, VAL_SAMPLES, SAVE
         tb = SummaryWriter()                                                                                # Create the tensorbaord "Summary Writer" object which stores train and val losses for visualisation 
     else:
         tb = None
+
+    print("\n Starting traing and evaluation...")
     
     for epoch in (range(NUM_EPOCHS)):     
         
@@ -268,6 +293,8 @@ def main(NUM_EPOCHS, BATCH_SIZE, LEARNING_RATE, TRAIN_SAMPLES, VAL_SAMPLES, SAVE
     
     torch.cuda.empty_cache()                                                                                # Clear the GPU cache
 
+    print("\n Training and Validation done !")
+
     
 if __name__ == '__main__':
 
@@ -278,8 +305,9 @@ if __name__ == '__main__':
     parser.add_argument('--learning_rate', required = True, type = float, help = "Enter the learning_rate to be used for training")
     parser.add_argument('--train_samples', required = True, type = int, help = "Enter number of samples used in train set out of 13108 (train_samples + val_samples = 13108)")
     parser.add_argument('--val_samples', required = True, type = int, help = "Enter number of samples used in val set out of 13108 (train_samples + val_samples = 13108)")
+    parser.add_argument('--path_pkl_files', type = str, help = "Enter the absolute directory location of the pkl_files folder")
     parser.add_argument('--tensor_board_viz', type = str, help = "Is tensorboard visualisation required for train and val losses: Yes/No ")
 
     args = parser.parse_args()
     
-    main(args.num_epochs, args.batch_size, args.learning_rate, args.train_samples, args.val_samples, args.tensor_board_viz)
+    main(args.num_epochs, args.batch_size, args.learning_rate, args.train_samples, args.val_samples, args.path_pkl_files, args.tensor_board_viz)

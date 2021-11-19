@@ -65,7 +65,7 @@ class VizWiz_VQA_Dataset(Dataset):
         # -------------------------------------------------------------------------------------------------------------------
         # 1. Load question_BOW ---> Convert to numpy array
 
-        with open(self.data_root + '/pkl_files/question_BOW_VizWiz.pkl', 'rb') as f:
+        with open(self.data_root + '/question_BOW_VizWiz.pkl', 'rb') as f:
             training_questions = pickle.load(f)
 
         # print("\n Training Questions Shape: ", training_questions[0].shape)
@@ -79,7 +79,7 @@ class VizWiz_VQA_Dataset(Dataset):
         # -------------------------------------------------------------------------------------------------------------------
         # 2. Load label_vectors ---> Convert to numpy array
 
-        with open(self.data_root + '/pkl_files/label_vec_VizWiz.pkl', 'rb') as f:
+        with open(self.data_root + '/label_vec_VizWiz.pkl', 'rb') as f:
             answers_train = pickle.load(f)
 
         # print("\n Total label vectors: ", len(answers_train))
@@ -99,14 +99,14 @@ class VizWiz_VQA_Dataset(Dataset):
         # -------------------------------------------------------------------------------------------------------------------
         # 3. Load image features and the updated_annotations.json file ---> Filter out required features based on selected data points ---> Convert to numpy array
 
-        with open(self.data_root + '/pkl_files/updated_annotations.json', 'r') as lst:
+        with open(self.data_root + '/updated_annotations.json', 'r') as lst:
             filtered_data = ast.literal_eval(lst.read())                                    # Read the .json file which contains the filtered data points
 
         names_list = list()
         for names in filtered_data:
             names_list.append(names['image'])                                               # Append names of all filtered images to the names_list
 
-        with open(self.data_root + '/pkl_files/VizWiz_Inception_normalised_max.pkl', 'rb') as f:
+        with open(self.data_root + '/VizWiz_Inception_normalised_max.pkl', 'rb') as f:
             img_features, img_name = pickle.load(f)                                         # Load generated CNN features and corresponding names for all images in dataset (23890 in number)
 
         all_features = pd.DataFrame(img_name, columns = ['image'])                          # Create pandas dataframe which will constitute all image features and corresponding image_names in the dataset
