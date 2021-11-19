@@ -1,3 +1,12 @@
+'''
+Team 17 - CS 7641 ML Project Fall 2021
+"Visual Reasoning for the Visually Impaired"
+Authors: Angana Borah, Devshree Bharatia, Dimitri Adhikary, Megha Thukral, Yusuf Ali
+
+Script Summary: Define various deep network architectures which will be used for the VQA task
+'''
+
+
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
@@ -7,7 +16,7 @@ from torch.nn.utils.rnn import pack_padded_sequence
 
 class SimpleNet(nn.Module):
     '''
-    Simple Fully Connected Network with 4 hidden fully connected linear layers
+    Simple Fully Connected Network (Multi Layer Perceptron) with 4 hidden fully connected linear layers
     '''
 
     def __init__(self):
