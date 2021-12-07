@@ -86,12 +86,12 @@ layout: default
         <p>The first challenge that we faced is how to identify the images to be discarded.</p>
         
 <h4>Solution:</h4>
-<li>To identify such groups of images, we decided to perform K-means clustering on the original image dataset to generate similar clusters.</li>
-</li>After generating clusters of similar images, we manually went through each of the clusters, and discarded the clusters that seemed useless for our use case.</li>
-<li>The discarded clusters include clusters having blurred/ unclear images.</li>
+<li><p align="justify">To identify such groups of images, we decided to perform K-means clustering on the original image dataset to generate similar clusters.</p></li>
+<li><p align="justify">After generating clusters of similar images, we manually went through each of the clusters, and discarded the clusters that seemed useless for our use case.</p></li>
+<li><p align="justify">The discarded clusters include clusters having blurred/ unclear images.</p></li>
 
 <h4>Challenge 2: </h4>    
-        <p>K-means clustering uses Euclidean distance as the metric to determine the similarity between different images. But some images might contain similar objects but they might be present in different orientations/positions/color contrasts, etc. Hence considering just the euclidean distance between the pixel values is not a good metric. 
+        <p align="justify">K-means clustering uses Euclidean distance as the metric to determine the similarity between different images. But some images might contain similar objects but they might be present in different orientations/positions/color contrasts, etc. Hence considering just the euclidean distance between the pixel values is not a good metric. 
         </p>
 
 <h4>Solution:</h4>
@@ -101,7 +101,7 @@ Each CNN layer performs optimized operations like centering the objects, gray-sc
 </p>
     
 <h4>Challenge 3: </h4>   
-<p>The next challenge that we faced was to identify the correct value of K(number of clusters) to be generated.</p>
+<p align="justify">The next challenge that we faced was to identify the correct value of K(number of clusters) to be generated.</p>
 
 <h4>Solution:</h4>
 
@@ -508,19 +508,15 @@ Image_name : “ “, // Image name
 <p align="justify">After choosing the relevant clusters, the next task is to represent the training data to be fed into the neural network. We will be using the CNN features  along with Question Text features as our input features. We will fuse these vectors together by simply stacking the matrices.
 </p>
 
-<li>Image Representation:
-The CNN feature that we extracted in the above step for performing clustering (to run K-Means on) is able to capture the image features and is a good representation for our images. The size of each feature vector of an image is 2048.</li>
-<li>Text Representation:
-To model question text, we will be using the bag-of-words (BOW) technique. The BOW is a way of extracting features from text (frequency) to use in modeling. The size of the embedding of each of the questions is 3042. It involves two things, a vocabulary of known words (question vocabulary) and measure of the presence of these words.</li> 
+<li><p align="justify">Image Representation: The CNN feature that we extracted in the above step for performing clustering (to run K-Means on) is able to capture the image features and is a good representation for our images. The size of each feature vector of an image is 2048.</p></li>
+<li><p align="justify">Text Representation: To model question text, we will be using the bag-of-words (BOW) technique. The BOW is a way of extracting features from text (frequency) to use in modeling. The size of the embedding of each of the questions is 3042. It involves two things, a vocabulary of known words (question vocabulary) and measure of the presence of these words.</p></li> 
 
 <h3>Question BOW Generation</h3>
 <p align="justify">To generate BOW for questions, we have used the following steps:</p>
 
-<li>We applied standard preprocessing steps such as tokenizing the question texts, lower-casing all the tokens and removing all punctuation marks. We did not remove stop words (like what, how etc.) as these words appear initially in many questions and sometimes are highly correlated to the answer to a question. [1] 
-</li>
-<li>After preprocessing, we get 3042 unique words in question vocabulary.</li>
-<li>Therefore, we will represent each question using a vector of size 3042, where each column represents a unique word. For each question, we put the frequency of each word present in the question text. Thus, this generates a bag-of-words for the questions in the dataset.
-</li>
+<li><p align="justify">We applied standard preprocessing steps such as tokenizing the question texts, lower-casing all the tokens and removing all punctuation marks. We did not remove stop words (like what, how etc.) as these words appear initially in many questions and sometimes are highly correlated to the answer to a question. [1] </p></li>
+<li><p align="justify">After preprocessing, we get 3042 unique words in question vocabulary.</p></li>
+<li><p align="justify">Therefore, we will represent each question using a vector of size 3042, where each column represents a unique word. For each question, we put the frequency of each word present in the question text. Thus, this generates a bag-of-words for the questions in the dataset.</p></li>
 
 <h3>BERT Question Embeddings</h3>
 <p align="justify">We use SentenceBERT to encode all questions into 768-dimensional word embeddings. SentenceBERT takes sentences as an input (it can take a sentence pair as well). These sentences are then passed into a BERT model and a pooling layer to generate embeddings. 
