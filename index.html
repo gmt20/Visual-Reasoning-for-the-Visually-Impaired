@@ -551,11 +551,11 @@ We concatenate the BOW questions and images (2048 + 3042), to get a resultant ve
 <h3>Loss Function</h3>
 <p align="justify">
 	
-The proposed loss function, termed as soft cross entropy, is a simple weighted average of each unique ground-truth answer. 
+The proposed loss function, termed as soft cross entropy, is a simple weighted average of each unique ground-truth answer. </p>
 
-<img src="https://render.githubusercontent.com/render/math?math=L(x, c, w) = \sum_{i=1}^{|c|}w_i(\− x_{c_i} + log(\sum_{j=1}^{|x|}exp(x_j)))">
+<img src="loss_function.png" alt="Loss Function Equation">
 
-where c is a vector of unique ground-truth answers and w is a vector of answer weights computed as the number of times the unique answer appears in the ground-truth set divided by the total number of answers.
+<p align="justify">where c is a vector of unique ground-truth answers and w is a vector of answer weights computed as the number of times the unique answer appears in the ground-truth set divided by the total number of answers.
 
 </p>-->
 
