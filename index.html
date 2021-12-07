@@ -583,7 +583,10 @@ where c is a vector of unique ground-truth answers and w is a vector of answer w
 <p align="justify">t-SNE is an unsupervised, non-linear technique primarily used for data exploration and visualizing high-dimensional data. The t-SNE algorithm calculates a similarity measure between pairs of instances in the high dimensional space and in the low dimensional space. It then tries to optimize these two similarity measures using a cost function. t-SNE differs from PCA by preserving only small pairwise distances or local similarities whereas PCA is concerned with preserving large pairwise distances to maximize variance.</p>
 <p align="justify">In order to verify that the clusters selected manually were accurate, we used PCA to reduce the dimensionality and then t-SNE to visualize the high-dimensional data.</p>
 <p align="justify">In the figure below we can see that the clusters are well-defined, and hence we can clearly state that the clustering has been done accurately. We also tried tuning the hyperparameters by giving different values for (no. of clusters), to obtain different results.</p>
-
+<figure>
+  <img src="tsne.png" alt="t-distributed stochastic neighbor embedding" style="width:100%">
+  <figcaption align="center">Figure 14: t-distributed stochastic neighbor embedding (t-SNE)</figcaption>
+</figure>
 
 
 
