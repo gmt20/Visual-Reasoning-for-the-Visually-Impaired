@@ -522,6 +522,12 @@ To model question text, we will be using the bag-of-words (BOW) technique. The B
 <li>Therefore, we will represent each question using a vector of size 3042, where each column represents a unique word. For each question, we put the frequency of each word present in the question text. Thus, this generates a bag-of-words for the questions in the dataset.
 </li>
 
+<h3>BERT Question Embeddings</h3>
+<p align="justify">We use SentenceBERT to encode all questions into 768-dimensional word embeddings. SentenceBERT[1] takes sentences as an input (it can take a sentence pair as well). These sentences are then passed into a BERT model and a pooling layer to generate embeddings. 
+BERT stands for Bidirectional Encoder Representations from Transformers. It is a transformer-based machine learning technique for natural language processing pre-training developed by Google. SentenceBERT uses siamese and triplet network structures to derive semantically meaningful sentence embeddings that can be compared using cosine-similarity. 
+Using sentence embeddings in BERT requires pre-processing such as adding tokens like [CLS] and [SEP] tokens, denoting the start and end of the sentence. We use the BERT tokenizer to tokenize the sentences. We take the last hidden layer of SentenceBERT to compute the embeddings. These embeddings are of dimension 768 for each question sentence. 
+</p>
+
 <h3>Answer Representation</h3>
 <p align="justify">Similar to Question text representation, we also need to model answer text. The unique thing about the Vizwiz dataset is that for each question, we have 10 answers that are annotated. So we have multiple ground truth labels for each question. We decided not to use One hot encoding because that would lead to very high dimensional label vectors, blowing up the feature space making the model suffer from the curse of dimensionality. Thus, we followed the following steps:
 </p>
