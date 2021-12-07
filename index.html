@@ -573,6 +573,26 @@ where c is a vector of unique ground-truth answers and w is a vector of answer w
   <figcaption align="center">Figure 13: Validation Loss</figcaption>
 </figure>
 
+<h3>Accuracy Metric Used</h3>
+<p align="justify">The 10 answers given by humans for each visual question can differ and therefore, a prediction to a visual question can be 100% correct if the answer has at least 3 occurrences, ∼67% if the occurrences are exactly 2, ∼33% if the answer appears only once in the sample annotations.
+</p>
+<p align="justify">Hence, we use the following accuracy metric:</p>
+<p align="justify">Accuracy = min(number of humans that provided that answer / 3 , 1)</p>
+
+<h4>t-SNE:</h4>
+<p align="justify">t-SNE is an unsupervised, non-linear technique primarily used for data exploration and visualizing high-dimensional data. The t-SNE algorithm calculates a similarity measure between pairs of instances in the high dimensional space and in the low dimensional space. It then tries to optimize these two similarity measures using a cost function. t-SNE differs from PCA by preserving only small pairwise distances or local similarities whereas PCA is concerned with preserving large pairwise distances to maximize variance.</p>
+<p align="justify">In order to verify that the clusters selected manually were accurate, we used PCA to reduce the dimensionality and then t-SNE to visualize the high-dimensional data.</p>
+<p align="justify">In the figure below we can see that the clusters are well-defined, and hence we can clearly state that the clustering has been done accurately. We also tried tuning the hyperparameters by giving different values for (no. of clusters), to obtain different results.</p>
+
+
+
+
+
+
+
+
+
+
 <h3>Future Scope</h3>
 <p align="justify">For the future scope of the project, we intend to do the following to improve accuracy:
 </p>
