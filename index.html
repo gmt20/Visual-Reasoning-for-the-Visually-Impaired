@@ -508,8 +508,8 @@ Image_name : “ “, // Image name
 <p align="justify">After choosing the relevant clusters, the next task is to represent the training data to be fed into the neural network. We will be using the CNN features  along with Question Text features as our input features. We will fuse these vectors together by simply stacking the matrices.
 </p>
 
-<li><p align="justify">Image Representation: The CNN feature that we extracted in the above step for performing clustering (to run K-Means on) is able to capture the image features and is a good representation for our images. The size of each feature vector of an image is 2048.</p></li>
-<li><p align="justify">Text Representation: To model question text, we will be using the bag-of-words (BOW) technique. The BOW is a way of extracting features from text (frequency) to use in modeling. The size of the embedding of each of the questions is 3042. It involves two things, a vocabulary of known words (question vocabulary) and measure of the presence of these words.</p></li> 
+<p align="justify"><li>Image Representation: The CNN feature that we extracted in the above step for performing clustering (to run K-Means on) is able to capture the image features and is a good representation for our images. The size of each feature vector of an image is 2048.</li></p>
+<p align="justify"><li>Text Representation: To model question text, we will be using the bag-of-words (BOW) technique. The BOW is a way of extracting features from text (frequency) to use in modeling. The size of the embedding of each of the questions is 3042. It involves two things, a vocabulary of known words (question vocabulary) and measure of the presence of these words.</li></p> 
 
 <h3>Question BOW Generation</h3>
 <p align="justify">To generate BOW for questions, we have used the following steps:</p>
