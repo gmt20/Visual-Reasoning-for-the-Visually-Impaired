@@ -508,15 +508,15 @@ Image_name : “ “, // Image name
 <p align="justify">After choosing the relevant clusters, the next task is to represent the training data to be fed into the neural network. We will be using the CNN features  along with Question Text features as our input features. We will fuse these vectors together by simply stacking the matrices.
 </p>
 
-<p align="justify"><li>Image Representation: The CNN feature that we extracted in the above step for performing clustering (to run K-Means on) is able to capture the image features and is a good representation for our images. The size of each feature vector of an image is 2048.</li></p>
-<p align="justify"><li>Text Representation: To model question text, we will be using the bag-of-words (BOW) technique. The BOW is a way of extracting features from text (frequency) to use in modeling. The size of the embedding of each of the questions is 3042. It involves two things, a vocabulary of known words (question vocabulary) and measure of the presence of these words.</li></p> 
+<li align="justify">Image Representation: The CNN feature that we extracted in the above step for performing clustering (to run K-Means on) is able to capture the image features and is a good representation for our images. The size of each feature vector of an image is 2048.</li>
+<li align="justify">Text Representation: To model question text, we will be using the bag-of-words (BOW) technique. The BOW is a way of extracting features from text (frequency) to use in modeling. The size of the embedding of each of the questions is 3042. It involves two things, a vocabulary of known words (question vocabulary) and measure of the presence of these words.</li>
 
 <h3>Question BOW Generation</h3>
 <p align="justify">To generate BOW for questions, we have used the following steps:</p>
 
-<li><p align="justify">We applied standard preprocessing steps such as tokenizing the question texts, lower-casing all the tokens and removing all punctuation marks. We did not remove stop words (like what, how etc.) as these words appear initially in many questions and sometimes are highly correlated to the answer to a question. [1] </p></li>
-<li><p align="justify">After preprocessing, we get 3042 unique words in question vocabulary.</p></li>
-<li><p align="justify">Therefore, we will represent each question using a vector of size 3042, where each column represents a unique word. For each question, we put the frequency of each word present in the question text. Thus, this generates a bag-of-words for the questions in the dataset.</p></li>
+<li align="justify">We applied standard preprocessing steps such as tokenizing the question texts, lower-casing all the tokens and removing all punctuation marks. We did not remove stop words (like what, how etc.) as these words appear initially in many questions and sometimes are highly correlated to the answer to a question. [1] </li>
+<li align="justify">After preprocessing, we get 3042 unique words in question vocabulary. </li>
+<li align="justify">Therefore, we will represent each question using a vector of size 3042, where each column represents a unique word. For each question, we put the frequency of each word present in the question text. Thus, this generates a bag-of-words for the questions in the dataset.</li>
 
 <h3>BERT Question Embeddings</h3>
 <p align="justify">We use SentenceBERT to encode all questions into 768-dimensional word embeddings. SentenceBERT takes sentences as an input (it can take a sentence pair as well). These sentences are then passed into a BERT model and a pooling layer to generate embeddings. 
@@ -528,12 +528,12 @@ Using sentence embeddings in BERT requires pre-processing such as adding tokens 
 <p align="justify">Similar to Question text representation, we also need to model answer text. The unique thing about the Vizwiz dataset is that for each question, we have 10 answers that are annotated. So we have multiple ground truth labels for each question. We decided not to use One hot encoding because that would lead to very high dimensional label vectors, blowing up the feature space making the model suffer from the curse of dimensionality. Thus, we followed the following steps:
 </p>
 
-<li>We combined answers of all the questions together to form a large corpus. </li>
-<li>We used similar preprocessing steps (like used for questions) such as tokenizing the answer lists and removing all punctuation marks.</li> 
-<li>After the preprocessing, we take top-K(=3000) unique words in answer vocabulary.</li>
-<li>Then we count the frequency of each word in this text corpus and choose the top K most frequent words.</li>
-<li>So, we create a vector of size K for the answer label for each question.</li>
-<li>We represent this K sized answer label for each question by creating the vector with the count of each of  words that appear in top K words in the 10 answers.</li>
+<li align="justify">We combined answers of all the questions together to form a large corpus. </li>
+<li align="justify">We used similar preprocessing steps (like used for questions) such as tokenizing the answer lists and removing all punctuation marks.</li> 
+<li align="justify">After the preprocessing, we take top-K(=3000) unique words in answer vocabulary.</li>
+<li align="justify">Then we count the frequency of each word in this text corpus and choose the top K most frequent words.</li>
+<li align="justify">So, we create a vector of size K for the answer label for each question.</li>
+<li align="justify">We represent this K sized answer label for each question by creating the vector with the count of each of  words that appear in top K words in the 10 answers.</li>
 
 <h3>Architecture</h3>
 <p align="justify">As discussed in the training pipeline, we have the image + question embedding for each of the (image, question) pairs. For image embeddings, we use the frozen parameters from the Inceptionv3 model learned on ImageNet classification, and no fine-tuning was performed. 
@@ -545,9 +545,7 @@ We concatenate the BOW questions and images (2048 + 3042), to get a resultant ve
 </figure>
 
 <h3>Loss Function</h3>
-<p align="justify">
-	
-The proposed loss function, termed as soft cross entropy, is a simple weighted average of each unique ground-truth answer. </p>
+<p align="justify">The proposed loss function, termed as soft cross entropy, is a simple weighted average of each unique ground-truth answer. </p>
 
 <figure>
   <img src="loss_function.png" alt="Loss Function Equation">
@@ -572,15 +570,13 @@ The proposed loss function, termed as soft cross entropy, is a simple weighted a
 </figure>
 
 <h3>Accuracy Metric Used</h3>
-<p align="justify">The 10 answers given by humans for each visual question can differ and therefore, a prediction to a visual question can be 100% correct if the answer has at least 3 occurrences, ∼67% if the occurrences are exactly 2, ∼33% if the answer appears only once in the sample annotations.
-</p>
+<p align="justify">The 10 answers given by humans for each visual question can differ and therefore, a prediction to a visual question can be 100% correct if the answer has at least 3 occurrences, ∼67% if the occurrences are exactly 2, ∼33% if the answer appears only once in the sample annotations.</p>
 <p align="justify">Hence, we use the following accuracy metric:</p>
 <p align="justify">Accuracy = min(number of humans that provided that answer / 3 , 1)</p>
 
 <h4>t-SNE:</h4>
-<p align="justify">t-SNE is an unsupervised, non-linear technique primarily used for data exploration and visualizing high-dimensional data. The t-SNE algorithm calculates a similarity measure between pairs of instances in the high dimensional space and in the low dimensional space. It then tries to optimize these two similarity measures using a cost function. t-SNE differs from PCA by preserving only small pairwise distances or local similarities whereas PCA is concerned with preserving large pairwise distances to maximize variance.</p>
-<p align="justify">In order to verify that the clusters selected manually were accurate, we used PCA to reduce the dimensionality and then t-SNE to visualize the high-dimensional data.</p>
-<p align="justify">In the figure below we can see that the clusters are well-defined, and hence we can clearly state that the clustering has been done accurately. We also tried tuning the hyperparameters by giving different values for (no. of clusters), to obtain different results.</p>
+<p align="justify">t-SNE is an unsupervised, non-linear technique primarily used for data exploration and visualizing high-dimensional data. The t-SNE algorithm calculates a similarity measure between pairs of instances in the high dimensional space and in the low dimensional space. It then tries to optimize these two similarity measures using a cost function. t-SNE differs from PCA by preserving only small pairwise distances or local similarities whereas PCA is concerned with preserving large pairwise distances to maximize variance.
+In order to verify that the clusters selected manually were accurate, we used PCA to reduce the dimensionality and then t-SNE to visualize the high-dimensional data. In the figure below we can see that the clusters are well-defined, and hence we can clearly state that the clustering has been done accurately. We also tried tuning the hyperparameters by giving different values for (no. of clusters), to obtain different results.</p>
 <figure>
   <img src="tsne.png" alt="t-distributed stochastic neighbor embedding" style="width:100%">
   <figcaption align="center">Figure 14: t-distributed stochastic neighbor embedding (t-SNE)</figcaption>
@@ -595,19 +591,18 @@ The proposed loss function, termed as soft cross entropy, is a simple weighted a
 
 
 <h3>Future Scope</h3>
-<p align="justify">For the future scope of the project, we intend to do the following to improve accuracy:
-</p>
-<li>We plan to use other CNN architectures such as ResNet and check if we can arrive at better results.</li>
-<li>We plan to use the LSTM for representing our question text data. Unlike the bag of words technique we use currently, LSTM will be able to take meaning in consideration. If we use appropriate layers of embedding and encoding in LSTM, the model will be able to find out the actual meaning in input string and will give the most accurate output class.</li>
+<p align="justify">For the future scope of the project, we intend to do the following to improve accuracy:</p>
+<li align="justify">We plan to use other CNN architectures such as ResNet and check if we can arrive at better results.</li>
+<li align="justify">We plan to use the LSTM for representing our question text data. Unlike the bag of words technique we use currently, LSTM will be able to take meaning in consideration. If we use appropriate layers of embedding and encoding in LSTM, the model will be able to find out the actual meaning in input string and will give the most accurate output class.</li>
 
 <h2>References</h3>
-<li>Antol, S., Agrawal, A., Lu, J., Mitchell, M., Batra, D., Zitnick, C. L., & Parikh, D. (2015). Vqa: Visual question answering. In Proceedings of the IEEE international conference on computer vision (pp. 2425-2433).</li>
-<li>Szegedy, C., Vanhoucke, V., Ioffe, S., Shlens, J., & Wojna, Z. (2016). Rethinking the inception architecture for computer vision. In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 2818-2826).</li>
-<li>He, K., Zhang, X., Ren, S., & Sun, J. (2016). Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 770-778).</li>
-<li>Ilievski, I., & Feng, J. (2017). A simple loss function for improving the convergence and accuracy of visual question answering models. arXiv preprint arXiv:1708.00584.</li>
-<li>Dushi, D. (2019). Using Deep Learning to Answer Visual Questions from Blind People.</li>
-<li>Zeeshan Saquib, et. al.BlinDar: An Invisible Eye for the Blind People, IEEE International Conference On Recent Trends In Electronics Information Communication Technology, India, May 2017.</li>
-<li><a href="https://www.image-net.org">ImageNet</a>
+<li align="justify">Antol, S., Agrawal, A., Lu, J., Mitchell, M., Batra, D., Zitnick, C. L., & Parikh, D. (2015). Vqa: Visual question answering. In Proceedings of the IEEE international conference on computer vision (pp. 2425-2433).</li>
+<li align="justify">Szegedy, C., Vanhoucke, V., Ioffe, S., Shlens, J., & Wojna, Z. (2016). Rethinking the inception architecture for computer vision. In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 2818-2826).</li>
+<li align="justify">He, K., Zhang, X., Ren, S., & Sun, J. (2016). Deep residual learning for image recognition. In Proceedings of the IEEE conference on computer vision and pattern recognition (pp. 770-778).</li>
+<li align="justify">Ilievski, I., & Feng, J. (2017). A simple loss function for improving the convergence and accuracy of visual question answering models. arXiv preprint arXiv:1708.00584.</li>
+<li align="justify">Dushi, D. (2019). Using Deep Learning to Answer Visual Questions from Blind People.</li>
+<li align="justify">Zeeshan Saquib, et. al.BlinDar: An Invisible Eye for the Blind People, IEEE International Conference On Recent Trends In Electronics Information Communication Technology, India, May 2017.</li>
+<li align="justify"><a href="https://www.image-net.org">ImageNet</a>
 
 </body>
     
