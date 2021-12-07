@@ -225,7 +225,7 @@ Image_name : “ “, // Image name
 <p align="justify">We also experimented taking max pooling and average pooling post the convolution layers for both Inceptionv3 and ResNet models, the results of which are shared in Tables 4, 5, 6, 7 and 8.
 </p>
 
-<h3>Resnet V/s Inception V/s VGG16</h3>
+<h3>Resnet V/s Inception</h3>
 <h4>InceptionV3_Max_Normalized</h4>
 
 <table>
@@ -511,12 +511,20 @@ Image_name : “ “, // Image name
 <li align="justify">Image Representation: The CNN feature that we extracted in the above step for performing clustering (to run K-Means on) is able to capture the image features and is a good representation for our images. The size of each feature vector of an image is 2048.</li>
 <li align="justify">Text Representation: To model question text, we will be using the bag-of-words (BOW) technique. The BOW is a way of extracting features from text (frequency) to use in modeling. The size of the embedding of each of the questions is 3042. It involves two things, a vocabulary of known words (question vocabulary) and measure of the presence of these words.</li>
 
-<h3>Question BOW Generation</h3>
+<h2>Question Representation</h2>
+
+<h3>Bag of Words</h3>
 <p align="justify">To generate BOW for questions, we have used the following steps:</p>
 
 <li align="justify">We applied standard preprocessing steps such as tokenizing the question texts, lower-casing all the tokens and removing all punctuation marks. We did not remove stop words (like what, how etc.) as these words appear initially in many questions and sometimes are highly correlated to the answer to a question. [1] </li>
 <li align="justify">After preprocessing, we get 3042 unique words in question vocabulary. </li>
 <li align="justify">Therefore, we will represent each question using a vector of size 3042, where each column represents a unique word. For each question, we put the frequency of each word present in the question text. Thus, this generates a bag-of-words for the questions in the dataset.</li>
+
+<h3>Limitations of Bag of Words</h3>
+Using the bag-of-words technique has the following two limitations:
+<li align="justify"> Generation of Sparse Represenatations: For very large input data, the resultant vectors generated will be of large dimensions, which would in turn contain large number of null values. Hence this would lead to the generation of sparse vectors, thus redcing the accuracy of the model.</li>
+<li align="justify"> Missing context: Bag of words does a very poor job in analyzing the context of the data. Here, using BERT, an attention-based deep learning model would help to solve the problem of contextual awareness.</li>
+
 
 <h3>BERT Question Embeddings</h3>
 <p align="justify">We use SentenceBERT to encode all questions into 768-dimensional word embeddings. SentenceBERT takes sentences as an input (it can take a sentence pair as well). These sentences are then passed into a BERT model and a pooling layer to generate embeddings. 
@@ -524,14 +532,13 @@ BERT stands for Bidirectional Encoder Representations from Transformers. It is a
 Using sentence embeddings in BERT requires pre-processing such as adding tokens like [CLS] and [SEP] tokens, denoting the start and end of the sentence. We use the BERT tokenizer to tokenize the sentences. We take the last hidden layer of SentenceBERT to compute the embeddings. These embeddings are of dimension 768 for each question sentence. 
 </p>
 
-<h3>Answer Representation</h3>
-<p align="justify">Similar to Question text representation, we also need to model answer text. The unique thing about the Vizwiz dataset is that for each question, we have 10 answers that are annotated. So we have multiple ground truth labels for each question. We decided not to use One hot encoding because that would lead to very high dimensional label vectors, blowing up the feature space making the model suffer from the curse of dimensionality. Thus, we followed the following steps:
+<h2>Answer Representation</h2>
+<p align="justify">Similar to Question text representation, we also need to model answer text. The unique thing about the Vizwiz dataset is that for each question, we have 10 answers that are annotated. So we have multiple ground truth labels for each question. We decided not to use One hot encoding because that would lead to very high dimensional label vectors, blowing up the feature space and making the model suffer from the curse of dimensionality. Thus, we followed the following steps:
 </p>
 
 <li align="justify">We combined answers of all the questions together to form a large corpus. </li>
 <li align="justify">We used similar preprocessing steps (like used for questions) such as tokenizing the answer lists and removing all punctuation marks.</li> 
-<li align="justify">After the preprocessing, we take top-K(=3000) unique words in answer vocabulary.</li>
-<li align="justify">Then we count the frequency of each word in this text corpus and choose the top K most frequent words.</li>
+<li align="justify">After the preprocessing, we count the frequency of each word in this text corpus and choose the top K most frequent words. Here we have taken top-K(=3000) unique words from the answer vocabulary.</li>
 <li align="justify">So, we create a vector of size K for the answer label for each question.</li>
 <li align="justify">We represent this K sized answer label for each question by creating the vector with the count of each of  words that appear in top K words in the 10 answers.</li>
 
