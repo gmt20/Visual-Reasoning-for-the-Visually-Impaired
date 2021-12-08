@@ -616,6 +616,39 @@ Hence, we use the following accuracy metric:</p>
 
 <h3>Final Results</h3>
 
+<h4>BERT and BOW Models without dropout and regularization</h4>
+Baseline Accuracy Graph for epochs = 100 for training dataset without dropout and regularization
+
+Baseline Accuracy Graph for epochs = 100 for validation dataset without dropout and regularization
+
+BERT Accuracy Graph for epochs = 100 for training dataset without dropout and regularization
+
+BERT Accuracy Graph for epochs = 100 for validation dataset without dropout and regularization
+
+<h4>BERT and BOW Models with dropout and regularization</h4>
+
+Model 1: 4 Hidden Layers with BOW with Learning rate set to 1e-6.
+
+Model 2: 4 Hidden Layers with BERT embeddings with Learning rate set to 1e-5
+
+Model 3: 4 Hidden Layers with BERT embeddings with Learning rate set to 1e-4
+
+Model 4: 1 Hidden Layer with BERT embeddings , Learning rate set to 1e-5 and number of neurons set to 5000.
+
+Model 5: 1 Hidden Layer with BERT embeddings, drop out layers(0.5) , Learning rate set to 1e-5 and number of neurons set to 3000 and L2 regularization(1e-5).
+
+Model 6: 1 Hidden Layer with BERT embeddings, drop out layers(0.5) , Learning rate set to 1e-5 and number of neurons set to 1024 and L2 regularization(1e-5).
+
+Model 7: 1 Hidden Layer with BERT embeddings, drop out layers(0.5) , Learning rate set to 1e-5 and number of neurons set to 1024 and L2 regularization(1e-5) only on training loss.
+
+Model 8: 1 Hidden Layer with BERT embeddings, drop out layers(0.5) , Learning rate set to 1e-5 and number of neurons set to 512 and L2 regularization(1e-5).
+
+Model 9: 1 Hidden Layer with BERT embeddings, drop out layers(0.5) , Learning rate set to 1e-5 and number of neurons set to 256 and L2 regularization(1e-5).
+
+Model 10: 2 Hidden Layers with BERT embeddings, drop out layers(0.5) , Learning rate set to 1e-5 and number of neurons set to 128 and L2 regularization(1e-5).
+
+Model 11: 1 Hidden Layers with BERT embeddings, drop out layers(0.5) , Learning rate set to 1e-5 and number of neurons set to 128 and L2 regularization(1e-5).
+
 <h3>Accuracy Analysis:</h3>
 The baseline accuracy is around 33%, and the final accuracy of the model with BERT is ____.
 Since the visually impaired people are taking pictures as well as asking questions themselves, the dataset being used is a challenging dataset for modern vision algorithms. It imposes the following challenges for model's training:
