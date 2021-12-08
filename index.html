@@ -599,7 +599,7 @@ Hence, we use the following accuracy metric:</p>
 Accuracy = min(number of humans that provided that answer / 3 , 1)
 
 
-<h3>Preliminary Results</h3>
+<h3>Preliminary Results for Mid-term</h3>
 <p align="justify">The following are the preliminary results of training on randomly selected samples from the filtered VizWiz dataset.
 </p>
 <li>Epochs: 150, Training Instances: 10000, Validation Instances: 3108, Optimiser: Adam, Learning Rate: 1e-6</li>
@@ -613,8 +613,16 @@ Accuracy = min(number of humans that provided that answer / 3 , 1)
   <figcaption align="center">Figure 13: Validation Loss</figcaption>
 </figure>
 
+<h3>Final Results</h3>
 
-
+<h3>Accuracy Analysis:</h3>
+The baseline accuracy is around 33%, and the final accuracy of the model with BERT is ____.
+Since the visually impaired people are taking pictures as well as asking questions themselves, the dataset being used is a challenging dataset for modern vision algorithms. It imposes the following challenges for model's training:
+<li>Images are often of poor quality due to low focus and poor lighting, which might lead to less accurate results.</li>
+<li>Questions are on average more conversational/absurd and in some cases are incomplete due to audio recording imperfections.</li>
+<li>Blind people are also not able to verify the correctness of image captured which lead to mismatch between image and question asked.</li>
+<li>We are using pre-trained ImageNet for making the image features and pretrained BERT sentence transformers to create text features. We have not tuned these features to our dataset. This might be leading to slightly lower accuracy than expected.</li>
+<li>We attribute the poor generalisation of this algorithm largely to its inability to predict answers observed in the dataset because only 824 out of the top 3000 answers in Vizwiz are included in the dataset used to train the model.</li>
 
 <h3>Future Scope</h3>
 <p align="justify">For the future scope of the project, we intend to do the following to improve accuracy:</p>
