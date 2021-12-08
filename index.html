@@ -725,17 +725,19 @@ Model 11: 1 Hidden Layers with BERT embeddings, drop out layers(0.5) , Learning 
 </figure>
 
 <h3>Accuracy Analysis:</h3>
-<p align="justify">The baseline accuracy is around 33%, and the final accuracy of the model with BERT is 35.8%. We see only a slight increase in the accuracy. Since the visually impaired people are taking pictures as well as asking questions themselves, the dataset being used is a challenging dataset for modern vision algorithms. It imposes the following challenges for model's training:</p>
+<p align="justify">The baseline accuracy is around 33%, and the final accuracy of the model with BERT is 35.8%. We see only a slight increase in the accuracy. Since the visually impaired people take pictures as well as ask questions themselves, the dataset being used is a challenging dataset for modern vision algorithms. It imposes the following challenges for model's training:</p>
 <li align="justify">Images are often of poor quality due to low focus and poor lighting, which might lead to less accurate results.</li>
 <li align="justify">Questions are on average more conversational/absurd and in some cases are incomplete due to audio recording imperfections.</li>
-<li align="justify">Blind people are also not able to verify the correctness of image captured which lead to mismatch between image and question asked.</li>
-<li align="justify">We are using pre-trained ImageNet for making the image features and pretrained BERT sentence transformers to create text features. We have not tuned these features to our dataset. This might be leading to slightly lower accuracy than expected.</li>
+<li align="justify">Visually impaired people are also not able to verify the correctness of image captured which sometimes may lead to mismatch between image and question asked.</li>
+<li align="justify">We are using pre-trained CNN architectures such as Inceptionv3 and ResNet for creating image features and pretrained BERT sentence transformers to create text features. We have not tuned these features to our dataset. And this might lead to a slightly lower accuracy than expected.</li>
 <li align="justify">We attribute the poor generalisation of this algorithm largely to its inability to predict answers observed in the dataset because only 824 out of the top 3000 answers in Vizwiz are included in the dataset used to train the model.</li>
 
 <h3>Future Scope</h3>
-<p align="justify">For the future scope of the project, we intend to do the following to improve accuracy:</p>
-<li align="justify">We plan to use other CNN architectures such as ResNet and check if we can arrive at better results.</li>
-<li align="justify">We plan to use the LSTM for representing our question text data. Unlike the bag of words technique we use currently, LSTM will be able to take meaning in consideration. If we use appropriate layers of embedding and encoding in LSTM, the model will be able to find out the actual meaning in input string and will give the most accurate output class.</li>
+<p align="justify">Following are some ways we can work on the future aspects of the project:</p>
+<li align="justify">To improve the dataset, data augmentation can be performed, such as adding data from other datasets. We can also work on adding further images using translation, rotation, flipping etc. And work on adding adding questions and answer sets in a similar way. </li>
+<li align="justify">Once accuracy is improved, our model can be utilized by the visually impaired for navigation purposes and performing daily chores. We can also request their feedback and input on developing the model </li>
+<li align="justify">Currently the dataset includes static images. In the future, video based analysis can be done, to make the system applicable to dynamic real time use cases. </li>
+<li align="justify"><>
 
 <h2>References</h3>
 <li align="justify">Antol, S., Agrawal, A., Lu, J., Mitchell, M., Batra, D., Zitnick, C. L., & Parikh, D. (2015). Vqa: Visual question answering. In Proceedings of the IEEE international conference on computer vision (pp. 2425-2433).</li>
