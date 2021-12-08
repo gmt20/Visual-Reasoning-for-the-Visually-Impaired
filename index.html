@@ -617,28 +617,28 @@ Hence, we use the following accuracy metric:</p>
 <h3>Final Results</h3>
 
 <h4>BERT and BOW Models without dropout and regularization</h4>
-Model 1: Baseline Accuracy Graph for epochs = 100, 4 Hidden Layers for training dataset without dropout and regularization
+<h5>Model 1: Baseline Accuracy Graph for epochs = 100, 4 Hidden Layers for training dataset without dropout and regularization</h5>
 
 <figure>
   <img src="Image1_Baseline.jpeg" alt="Preliminary Results" style="width:100%">
   <figcaption align="center">Figure 15: Validation Loss</figcaption>
 </figure>
 
-Model 2: Baseline Accuracy Graph for epochs = 100, 4 Hidden Layers for validation dataset without dropout and regularization
+<h5>Model 2: Baseline Accuracy Graph for epochs = 100, 4 Hidden Layers for validation dataset without dropout and regularization</h5>
 
 <figure>
   <img src="Image2_Baseline.jpeg" alt="Preliminary Results" style="width:100%">
   <figcaption align="center">Figure 16: Validation Loss</figcaption>
 </figure>
 
-Model 3: BERT Accuracy Graph for epochs = 100, 4 Hidden Layers for training dataset without dropout and regularization
+<h5>Model 3: BERT Accuracy Graph for epochs = 100, 4 Hidden Layers for training dataset without dropout and regularization</h5>
 
 <figure>
   <img src="Image_1_Bert.png" alt="Preliminary Results" style="width:100%">
   <figcaption align="center">Figure 17: Validation Loss</figcaption>
 </figure>
 
-Model 4: BERT Accuracy Graph for epochs = 100, 4 Hidden Layers for validation dataset without dropout and regularization
+<h5>Model 4: BERT Accuracy Graph for epochs = 100, 4 Hidden Layers for validation dataset without dropout and regularization</h5>
 
 <figure>
   <img src="Image2_Bert.png" alt="Preliminary Results" style="width:100%">
@@ -647,14 +647,14 @@ Model 4: BERT Accuracy Graph for epochs = 100, 4 Hidden Layers for validation da
 
 <h4>BERT and BOW Models with dropout and regularization</h4>
 
-Model 1: 4 Hidden Layers with BOW with Learning rate set to 1e-6.
+<h5>Model 1: 4 Hidden Layers with BOW with Learning rate set to 1e-6.</h5>
 
 <figure>
   <img src="E300_H4_LR1e-6_relu_B128_norm_BERT.png" alt="Preliminary Results" style="width:100%">
   <figcaption align="center">Figure 19: Validation Loss</figcaption>
 </figure>
 
-Model 2: 4 Hidden Layers with BERT embeddings with Learning rate set to 1e-5.
+<h5>Model 2: 4 Hidden Layers with BERT embeddings with Learning rate set to 1e-5.</h5>
 
 <figure>
   <img src="bert_lr1e-5_train.png" alt="Preliminary Results" style="width:100%">
@@ -666,7 +666,7 @@ Model 2: 4 Hidden Layers with BERT embeddings with Learning rate set to 1e-5.
   <figcaption align="center">Figure 21: Validation Loss</figcaption>
 </figure>
 
-Model 3: 4 Hidden Layers with BERT embeddings with Learning rate set to 1e-4.
+<h5>Model 3: 4 Hidden Layers with BERT embeddings with Learning rate set to 1e-4.</h5>
 
 <figure>
   <img src="bert_lr1-e4.png" alt="Preliminary Results" style="width:100%">
@@ -678,7 +678,7 @@ Model 3: 4 Hidden Layers with BERT embeddings with Learning rate set to 1e-4.
   <figcaption align="center">Figure 23: Validation Loss</figcaption>
 </figure>
 
-Model 4: 1 Hidden Layer with BERT embeddings , Learning rate set to 1e-5 and number of neurons set to 5000.
+<h5>Model 4: 1 Hidden Layer with BERT embeddings , Learning rate set to 1e-5 and number of neurons set to 5000.</h5>
 
 <figure>
   <img src="bert_h1_lr1e-5_dropout_train.png" alt="Preliminary Results" style="width:100%">
@@ -690,7 +690,7 @@ Model 4: 1 Hidden Layer with BERT embeddings , Learning rate set to 1e-5 and num
   <figcaption align="center">Figure 25: Validation Loss</figcaption>
 </figure>
 
-Model 5: 1 Hidden Layer with BERT embeddings, drop out layers(0.5) , Learning rate set to 1e-5 and number of neurons set to 3000 and L2 regularization(1e-5).
+<h5>Model 5: 1 Hidden Layer with BERT embeddings, drop out layers(0.5) , Learning rate set to 1e-5 and number of neurons set to 3000 and L2 regularization(1e-5).</h5>
 
 <figure>
   <img src="BERT_LR1e-5_H1-3000_Dropout_L2-1e-5.png" alt="Preliminary Results" style="width:100%">
@@ -702,42 +702,42 @@ Model 5: 1 Hidden Layer with BERT embeddings, drop out layers(0.5) , Learning ra
   <figcaption align="center">Figure 27: Validation Loss</figcaption>
 </figure>
 
-Model 6: 1 Hidden Layer with BERT embeddings, drop out layers(0.5) , Learning rate set to 1e-5 and number of neurons set to 1024 and L2 regularization(1e-5).
+<h5>Model 6: 1 Hidden Layer with BERT embeddings, drop out layers(0.5) , Learning rate set to 1e-5 and number of neurons set to 1024 and L2 regularization(1e-5).</h5>
 
 <figure>
   <img src="BERT_LR1e-5_H1-1024_Dropout_L2-1e-5.png" alt="Preliminary Results" style="width:100%">
   <figcaption align="center">Figure 28: Validation Loss</figcaption>
 </figure>
 
-Model 7: 1 Hidden Layer with BERT embeddings, drop out layers(0.5) , Learning rate set to 1e-5 and number of neurons set to 1024 and L2 regularization(1e-5) only on training loss.
+<h5>Model 7: 1 Hidden Layer with BERT embeddings, drop out layers(0.5) , Learning rate set to 1e-5 and number of neurons set to 1024 and L2 regularization(1e-5) only on training loss.</h5>
 
 <figure>
   <img src="BERT_H1-1024_LR1e-5_Dropout_L2-1e-5-Only-Train.png" alt="Preliminary Results" style="width:100%">
   <figcaption align="center">Figure 29: Validation Loss</figcaption>
 </figure>
 
-Model 8: 1 Hidden Layer with BERT embeddings, drop out layers(0.5) , Learning rate set to 1e-5 and number of neurons set to 512 and L2 regularization(1e-5).
+<h5>Model 8: 1 Hidden Layer with BERT embeddings, drop out layers(0.5) , Learning rate set to 1e-5 and number of neurons set to 512 and L2 regularization(1e-5).</h5>
 
 <figure>
   <img src="BERT_LR1e-5_L2-1e-5_both_H1-512.png" alt="Preliminary Results" style="width:100%">
   <figcaption align="center">Figure 30: Validation Loss</figcaption>
 </figure>
 
-Model 9: 1 Hidden Layer with BERT embeddings, drop out layers(0.5) , Learning rate set to 1e-5 and number of neurons set to 256 and L2 regularization(1e-5).
+<h5>Model 9: 1 Hidden Layer with BERT embeddings, drop out layers(0.5) , Learning rate set to 1e-5 and number of neurons set to 256 and L2 regularization(1e-5).</h5>
 
 <figure>
   <img src="BERT_LR1e-5_L2-1e-5_both_H1-256.png" alt="Preliminary Results" style="width:100%">
   <figcaption align="center">Figure 31: Validation Loss</figcaption>
 </figure>
 
-Model 10: 2 Hidden Layers with BERT embeddings, drop out layers(0.5) , Learning rate set to 1e-5 and number of neurons set to 128 and L2 regularization(1e-5).
+<h5>Model 10: 2 Hidden Layers with BERT embeddings, drop out layers(0.5) , Learning rate set to 1e-5 and number of neurons set to 128 and L2 regularization(1e-5).</h5>
 
 <figure>
   <img src="BERT_LR1e-5_L2-1e-5_both_H2-128.png" alt="Preliminary Results" style="width:100%">
   <figcaption align="center">Figure 32: Validation Loss</figcaption>
 </figure>
 
-Model 11: 1 Hidden Layers with BERT embeddings, drop out layers(0.5) , Learning rate set to 1e-5 and number of neurons set to 128 and L2 regularization(1e-5).
+<h5>Model 11: 1 Hidden Layers with BERT embeddings, drop out layers(0.5) , Learning rate set to 1e-5 and number of neurons set to 128 and L2 regularization(1e-5).</h5>
 
 <figure>
   <img src="BERT_LR1e-5_L2-1e-5_both_H1-128.png" alt="Preliminary Results" style="width:100%">
