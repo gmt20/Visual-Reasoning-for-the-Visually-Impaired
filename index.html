@@ -568,7 +568,7 @@ Using sentence embeddings in BERT requires pre-processing such as adding tokens 
 <p align="justify">We concatenate the BOW questions and images (2048 + 3042), to get a resultant vector of dimension 5090. We use this combined input for the Multi-Layer Perceptron (MLP). MLP is a fully connected neural network classifier consisting of 4 hidden layers with 5090 hidden units. We use ReLU for activation, which is finally followed by a log softmax layer to obtain a probability distribution over the top K answers. Since the VizWiz dataset has 10 ground-truth answers for each training instance, we use a "soft" cross-entropy loss so that the model optimises the weights by considering each ground-truth answer.
 </p>
 <figure>
-  <img src="Picture11.png" alt="Training Pipeline Architecture" style="width:100%">
+  <img src="Screenshot 2021-12-07 at 8.04.07 PM.png" alt="Training Pipeline Architecture" style="width:100%">
   <figcaption align="center">Figure 11: Training Pipeline Architecture</figcaption>
 </figure>
 
@@ -578,7 +578,7 @@ Here, we have generated results by changing the number of hidden layers, hidden 
 Similar to the previous architecture, we use ReLU as the activation function, which is followed by a log softmax layer to obtain a probability distribution over the top K answers. 
 </p>
 <figure>
-  <img src="Picture11.png" alt="Training Pipeline Architecture" style="width:100%">
+  <img src="Screenshot 2021-12-07 at 8.05.43 PM.png" alt="Training Pipeline Architecture" style="width:100%">
   <figcaption align="center">Figure 11: Training Pipeline Architecture</figcaption>
 </figure>
 
