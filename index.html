@@ -504,12 +504,30 @@ Image_name : “ “, // Image name
 <p align="justify">We finally use Inceptionv3 with max-pooling and run it on GPU using 32-sized batches. K-Means is run on these image feature vectors and based on the loss values received, we selected this architecture. 
 </p>
 
+<h3> Verification of Clustering using PCA and T-SNE</h3>
+Post k-means clustering, we selected a few clusters manually. In order to verify that the clusters selected manually were accurate, we used PCA to reduce the dimensionality and then t-SNE to visualize the high-dimensional data of images into clusters. 
+
+<h4>Principle Component Analysis(PCA)</h4>
+<p align="justify">PCA is the process of dimensionality reduction in which we can project each data point onto only to the first few principal components to obtain lower-dimensional data while preserving maximum datas variation. 
+Here, we use PCA to reduce the dimensionality of the feature vectors of the images, so that the feature vectors can then be given as input to T-SNE.
+</p>
+
+<h4>T-SNE:</h4>
+<p align="justify">T-SNE is an unsupervised, non-linear technique primarily used for data exploration and visualizing high-dimensional data. The t-SNE algorithm calculates a similarity measure between pairs of instances in the high dimensional space and in the low dimensional space. It then tries to optimize these two similarity measures using a cost function. t-SNE differs from PCA by preserving only small pairwise distances or local similarities whereas PCA is concerned with preserving large pairwise distances to maximize variance.
+</p>
+
+<p align="justify">In the figure below we can see that the clusters selected manually are well-defined, and hence we can clearly state that the clustering has been done accurately. We also tried tuning the hyperparameters by giving different values for (no. of clusters), to obtain different results.</p>
+<figure>
+  <img src="tsne.png" alt="t-distributed stochastic neighbor embedding" style="width:100%">
+  <figcaption align="center">Figure 14: t-distributed stochastic neighbor embedding (t-SNE)</figcaption>
+</figure>
+
 <h3>2. Training Pipeline:</h3>
 <p align="justify">After choosing the relevant clusters, the next task is to represent the training data to be fed into the neural network. We will be using the CNN features  along with Question Text features as our input features. We will fuse these vectors together by simply stacking the matrices.
 </p>
 
 <li align="justify">Image Representation: The CNN feature that we extracted in the above step for performing clustering (to run K-Means on) is able to capture the image features and is a good representation for our images. The size of each feature vector of an image is 2048.</li>
-<li align="justify">Text Representation: To model question text, we will be using the bag-of-words (BOW) technique. The BOW is a way of extracting features from text (frequency) to use in modeling. The size of the embedding of each of the questions is 3042. It involves two things, a vocabulary of known words (question vocabulary) and measure of the presence of these words.</li>
+<li align="justify">Text Representation: To model question text, we initially used the bag-of-words (BOW) technique. The BOW is a way of extracting features from text (frequency) to use in modeling. The size of the embedding of each of the questions is 3042. It involves two things, a vocabulary of known words (question vocabulary) and measure of the presence of these words. We further shifted from Bag of words to BERT to generate word embeddings and analyze context in the given questions.</li>
 
 <h2>Question Representation</h2>
 
@@ -522,7 +540,7 @@ Image_name : “ “, // Image name
 
 <h3>Limitations of Bag of Words</h3>
 Using the bag-of-words technique has the following two limitations:
-<li align="justify"> Generation of Sparse Represenatations: For very large input data, the resultant vectors generated will be of large dimensions, which would in turn contain large number of null values. Hence this would lead to the generation of sparse vectors, thus redcing the accuracy of the model.</li>
+<li align="justify"> Generation of Sparse Represenatations: For very large input data, the resultant vectors generated will be of large dimensions, which would in turn contain large number of null values. Hence this would lead to the generation of sparse vectors, thus blowing up the feature space.</li>
 <li align="justify"> Missing context: Bag of words does a very poor job in analyzing the context of the data. Here, using BERT, an attention-based deep learning model would help to solve the problem of contextual awareness.</li>
 
 
@@ -559,8 +577,7 @@ We concatenate the BOW questions and images (2048 + 3042), to get a resultant ve
 </figure>
 
 <p align="justify">where c is a vector of unique ground-truth answers and w is a vector of answer weights computed as the number of times the unique answer appears in the ground-truth set divided by the total number of answers.
-
-</p>-->
+</p>
 
 <h3>Preliminary Results</h3>
 <p align="justify">The following are the preliminary results of training on randomly selected samples from the filtered VizWiz dataset.
@@ -580,19 +597,6 @@ We concatenate the BOW questions and images (2048 + 3042), to get a resultant ve
 <p align="justify">The 10 answers given by humans for each visual question can differ and therefore, a prediction to a visual question can be 100% correct if the answer has at least 3 occurrences, ∼67% if the occurrences are exactly 2, ∼33% if the answer appears only once in the sample annotations.</p>
 <p align="justify">Hence, we use the following accuracy metric:</p>
 <p align="justify">Accuracy = min(number of humans that provided that answer / 3 , 1)</p>
-
-<h4>t-SNE:</h4>
-<p align="justify">t-SNE is an unsupervised, non-linear technique primarily used for data exploration and visualizing high-dimensional data. The t-SNE algorithm calculates a similarity measure between pairs of instances in the high dimensional space and in the low dimensional space. It then tries to optimize these two similarity measures using a cost function. t-SNE differs from PCA by preserving only small pairwise distances or local similarities whereas PCA is concerned with preserving large pairwise distances to maximize variance.
-In order to verify that the clusters selected manually were accurate, we used PCA to reduce the dimensionality and then t-SNE to visualize the high-dimensional data. In the figure below we can see that the clusters are well-defined, and hence we can clearly state that the clustering has been done accurately. We also tried tuning the hyperparameters by giving different values for (no. of clusters), to obtain different results.</p>
-<figure>
-  <img src="tsne.png" alt="t-distributed stochastic neighbor embedding" style="width:100%">
-  <figcaption align="center">Figure 14: t-distributed stochastic neighbor embedding (t-SNE)</figcaption>
-</figure>
-
-
-
-
-
 
 
 
