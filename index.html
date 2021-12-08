@@ -534,7 +534,7 @@ Here, we use PCA to reduce the dimensionality of the feature vectors of the imag
 <h3>Bag of Words</h3>
 <p align="justify">To generate BOW for questions, we have used the following steps:</p>
 
-<li align="justify">We applied standard preprocessing steps such as tokenizing the question texts, lower-casing all the tokens and removing all punctuation marks. We did not remove stop words (like what, how etc.) as these words appear initially in many questions and sometimes are highly correlated to the answer to a question. [1] </li>
+<li align="justify">We applied standard preprocessing steps such as tokenizing the question texts, lower-casing all the tokens and removing all punctuation marks. We did not remove stop words (like what, how etc.) as these words appear initially in many questions and sometimes are highly correlated to the answer to a question. </li>
 <li align="justify">After preprocessing, we get 3042 unique words in question vocabulary. </li>
 <li align="justify">Therefore, we will represent each question using a vector of size 3042, where each column represents a unique word. For each question, we put the frequency of each word present in the question text. Thus, this generates a bag-of-words for the questions in the dataset.</li>
 
@@ -579,7 +579,7 @@ Similar to the previous architecture, we use ReLU as the activation function, wh
 </p>
 <figure>
   <img src="Screenshot 2021-12-07 at 8.05.43 PM.png" alt="Training Pipeline Architecture" style="width:100%">
-  <figcaption align="center">Figure 11: Training Pipeline Architecture</figcaption>
+  <figcaption align="center">Figure 12: Training Pipeline Architecture</figcaption>
 </figure>
 
 <h3>Loss Function Used</h3>
@@ -595,8 +595,9 @@ Similar to the previous architecture, we use ReLU as the activation function, wh
 <h3>Accuracy Metric Used</h3>
 <p align="justify">The 10 answers given by humans for each visual question can differ and therefore, a prediction to a visual question can be 100% correct if the answer has at least 3 occurrences, ∼67% if the occurrences are exactly 2, ∼33% if the answer appears only once in the sample annotations.
 Hence, we use the following accuracy metric:</p>
-
-Accuracy = min(number of humans that provided that answer / 3 , 1)
+<figure>
+  <img src="accuracy_function.png" alt="Loss Function Equation">
+</figure>
 
 
 <h3>Preliminary Results for Mid-term</h3>
@@ -606,11 +607,11 @@ Accuracy = min(number of humans that provided that answer / 3 , 1)
 <li>Hidden Layers: 4, Activation: ReLU</li>
 <figure>
   <img src="e150_h4_lr1e-6_b128_norm_train.png" alt="Preliminary Results" style="width:100%">
-  <figcaption align="center">Figure 12: Train Loss</figcaption>
+  <figcaption align="center">Figure 13: Train Loss</figcaption>
 </figure>
 <figure>
   <img src="e150_h4_lr1e-6_b128_norm_val.png" alt="Preliminary Results" style="width:100%">
-  <figcaption align="center">Figure 13: Validation Loss</figcaption>
+  <figcaption align="center">Figure 14: Validation Loss</figcaption>
 </figure>
 
 <h3>Final Results</h3>
@@ -618,11 +619,11 @@ Accuracy = min(number of humans that provided that answer / 3 , 1)
 <h3>Accuracy Analysis:</h3>
 The baseline accuracy is around 33%, and the final accuracy of the model with BERT is ____.
 Since the visually impaired people are taking pictures as well as asking questions themselves, the dataset being used is a challenging dataset for modern vision algorithms. It imposes the following challenges for model's training:
-<li>Images are often of poor quality due to low focus and poor lighting, which might lead to less accurate results.</li>
-<li>Questions are on average more conversational/absurd and in some cases are incomplete due to audio recording imperfections.</li>
-<li>Blind people are also not able to verify the correctness of image captured which lead to mismatch between image and question asked.</li>
-<li>We are using pre-trained ImageNet for making the image features and pretrained BERT sentence transformers to create text features. We have not tuned these features to our dataset. This might be leading to slightly lower accuracy than expected.</li>
-<li>We attribute the poor generalisation of this algorithm largely to its inability to predict answers observed in the dataset because only 824 out of the top 3000 answers in Vizwiz are included in the dataset used to train the model.</li>
+<li align="justify">Images are often of poor quality due to low focus and poor lighting, which might lead to less accurate results.</li>
+<li align="justify">Questions are on average more conversational/absurd and in some cases are incomplete due to audio recording imperfections.</li>
+<li align="justify">Blind people are also not able to verify the correctness of image captured which lead to mismatch between image and question asked.</li>
+<li align="justify">We are using pre-trained ImageNet for making the image features and pretrained BERT sentence transformers to create text features. We have not tuned these features to our dataset. This might be leading to slightly lower accuracy than expected.</li>
+<li align="justify">We attribute the poor generalisation of this algorithm largely to its inability to predict answers observed in the dataset because only 824 out of the top 3000 answers in Vizwiz are included in the dataset used to train the model.</li>
 
 <h3>Future Scope</h3>
 <p align="justify">For the future scope of the project, we intend to do the following to improve accuracy:</p>
